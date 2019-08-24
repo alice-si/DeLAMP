@@ -14,7 +14,7 @@
       <div>
         <img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png" style="height:30px;" />
       </div>
-      <div class="head-title"> Investment Portal </div>
+      <div class="head-title"> LAMP </div>
 
     </div>
     <div class="sidebar-wrapper">

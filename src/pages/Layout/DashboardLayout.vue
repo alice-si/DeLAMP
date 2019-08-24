@@ -7,16 +7,21 @@
 
       <sidebar-link to="/popsicle">
         <md-icon>bubble_chart</md-icon>
-        <p>Popsicle</p>
+        <p>Contract Builder</p>
+      </sidebar-link>
+      <sidebar-link to="/interface">
+        <md-icon>unarchive</md-icon>
+        <p>Contract Interface</p>
       </sidebar-link>
       <sidebar-link to="/conditions">
-        <md-icon>person</md-icon>
-        <p>Conditions</p>
+        <md-icon>build</md-icon>
+        <p>Updates</p>
       </sidebar-link>
-      <sidebar-link to="/wallet">
-        <md-icon>unarchive</md-icon>
-        <p>Wallet</p>
+      <sidebar-link to="/conditions">
+        <md-icon>error</md-icon>
+        <p>Exceptions</p>
       </sidebar-link>
+
       <!--<sidebar-link to="/table">-->
         <!--<md-icon>content_paste</md-icon>-->
         <!--<p>Table list</p>-->
