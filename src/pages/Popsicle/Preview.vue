@@ -38,7 +38,7 @@ function getClauseDetails(id) {
 
 function createNewLegalClause(clauseDetails, args) {
   let result = Object.assign({}, clauseDetails);
-  result.args = args;
+  result.args = args || {};
   result.text = renderText(result.legalContent, result.args);
   return result;
 }
@@ -68,7 +68,7 @@ function watchChanges(data) {
     for (let selectedClause of state.selected) {
       let clauseDetails = getClauseDetails(selectedClause.id);
       let oldLegalClause = data.rendered[clauseDetails.type];
-      let newLegalClause = createNewLegalClause(clauseDetails, selectedClause.args);
+      let newLegalClause = createNewLegalClause(clauseDetails, selectedClause.arguments);
       if (!clausesEqual(oldLegalClause, newLegalClause)) {
         updateClause(clauseDetails.type, newLegalClause, data);
       }

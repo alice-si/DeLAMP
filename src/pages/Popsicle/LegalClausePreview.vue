@@ -3,7 +3,7 @@
     <!-- <h3>{{ type }} !-->
     <p class="clause-text" v-bind:class="{ highlighted }">
       <!-- {{ text || 'Empty' }} -->
-      <VueTyper type-delay=20 v-bind:text="text" :repeat=0  />
+      <VueTyper v-if="text" :typeDelay=20 :text="text" :repeat=0  />
     </p>
   </div>
   
