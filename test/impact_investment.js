@@ -3,6 +3,7 @@ var CommissionerFunding = artifacts.require("CommissionerFunding");
 var OpenFunding = artifacts.require("OpenFunding");
 var ClauseRegistry = artifacts.require("ClauseRegistry");
 var DisputeManager = artifacts.require("DisputeManager");
+var UpdateManager = artifacts.require("UpdateManager");
 
 require("./test-setup");
 
@@ -58,6 +59,17 @@ contract('Impact Investment', function([owner, author, arbiter, funder]) {
     funded = await legalContract.funded();
     console.log("Success: " + result.success + " failures: " + result.failure + " Registry Balance: " + regBalance  + " Author balance: " + aBalance + " Funding: " + funded);
 
+  });
+
+  it("should update parameter", async function() {
+    // let uma = await legalContract.updateManager();
+    // let um = await UpdateManager.at(uma);
+    // console.log(um);
+    await legalContract.addProposal('MAX_DONATION', 100);
+    await legalContract.update(0, {from: arbiter});
+
+    let check = await legalContract.getValue('MAX_DONATION');
+    console.log('MAX DONATION: ' + check);
   });
 
   // it("should appeal", async function() {

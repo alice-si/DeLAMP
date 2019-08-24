@@ -4,6 +4,7 @@ import Vue from 'vue';
 const ethers = require('ethers');
 const registryContract = require('../../build/contracts/ClauseRegistry.json');
 const disputeManagerContract = require('../../build/contracts/DisputeManager.json');
+const updateManagerContract = require('../../build/contracts/UpdateManager.json');
 const impactInvestmentContract = require('../../build/contracts/ImpactInvestment.json');
 const fundingContract = require('../../build/contracts/OpenFunding.json');
 
@@ -12,9 +13,9 @@ const AUTHOR = '0x0432043bE8CAbbA7df8759d6E9cE8Aa5Fcc4B009';
 //TODO: Replace with own ganache address
 const ARBITER = '0xCa9267EC6C6a127606A047c2cf2D152E6fE387A1';
 
-const REGISTRY_ADDRESS= '0x4e0D6436f82c9D7B17c4f62d30c615Dd7756471D';
-const FUNDING_ADDRESS = '0x2f106A81d1fD5BED5bBF8b03C425E013CD277323';
-const CONTRACT_ADDRESS = '0xb0899fedB841476A928d76b6B78635687B376f2A';
+const REGISTRY_ADDRESS= '0x7cB860aFeBB45D2296C53e8A96d045703767b027';
+const FUNDING_ADDRESS = '0x0abcFb734465d5c2B0d4745f73875984DC82b025';
+const CONTRACT_ADDRESS = '0xc363604a833679705664e5BCB04b4670E471e8f8';
 
 var provider, signer, impactContract, registry, fundingClause, disputeManager;
 
@@ -104,6 +105,40 @@ export const contracts = {
     await impactContract.appeal(index);
 
     await this.fetchExceptions();
+    await this.fetchState();
+  },
+  addProposal: async function(parameter, value) {
+    console.log("Adding proposal: " + parameter + " with value: " + value);
+    await impactContract.addProposal(parameter, value);
+    await this.fetchUpdates();
+  },
+  fetchUpdates: async function() {
+    console.log("Fetching updates");
+    state.updates.length = 0;
+
+    let umAddress = await impactContract.updateManager();
+    let updateManager = new ethers.Contract(umAddress, updateManagerContract.abi, signer);
+
+    let arbiter = await impactContract.getRole('ARBITER');
+    let currentAccount = await signer.getAddress();
+
+    let count = (await updateManager.getProposalsCount()).valueOf();
+    for(var i=0; i<count; i++) {
+      let proposal = await updateManager.getProposal(i);
+      state.updates.push({
+        id: i,
+        symbol: proposal[0],
+        value: proposal[1],
+        updated: proposal[2],
+        canUpdate: arbiter === currentAccount
+      })
+    }
+  },
+  update: async function(id) {
+    console.log("Updating proposal: " + id);
+
+    await impactContract.update(id);
+    await this.fetchUpdates();
     await this.fetchState();
   }
 
