@@ -8,7 +8,15 @@ let conf = {
         arguments: {
           max: 'number'
         },
-        popularity: 47,
+        tracking: {
+          author: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          auditor: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          authorFee: 1,
+          auditorFee: 100,
+          registryFee: 12,
+          successCount: 123,
+          failureCount: 12
+        }
       },
       {
         id: 'comission',
@@ -18,7 +26,15 @@ let conf = {
           max: 'number',
           address: 'string',
         },
-        popularity: 53,
+        tracking: {
+          author: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          auditor: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          authorFee: 1,
+          auditorFee: 100,
+          registryFee: 12,
+          successCount: 123,
+          failureCount: 12
+        }
       }
     ],
     'Investment': [
@@ -32,7 +48,15 @@ let conf = {
           priceMechanism: 'string',
           denomination: 'number',
         },
-        popularity: 88,
+        tracking: {
+          author: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          auditor: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',
+          authorFee: 1,
+          auditorFee: 100,
+          registryFee: 12,
+          successCount: 123,
+          failureCount: 12
+        }
       },
     ]
   },

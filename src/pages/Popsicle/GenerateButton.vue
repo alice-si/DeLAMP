@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button disabled="disabled" v-if="!canBeDeployed">
+    <!-- <button disabled="disabled" v-show="!canBeDeployed">
       Can't be deployed yet
-    </button>
+    </button> -->
 
-    <button v-if="canBeDeployed" id="generate-button">
+    <button v-show="canBeDeployed" id="generate-button">
       Deploy and print
     </button>
   </div>
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     canBeDeployed() {
-      this.state.selected.length == clausesConfig.types.length;
+      this.state.selected.length >= clausesConfig.types.length;
     }
   },
   methods: {

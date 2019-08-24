@@ -1,12 +1,11 @@
 <template>
   <div class="md-layout md-size-100"
-       id="popsiclePage"
-       style="border: 1px solid blue">
-    <div class="md-layout-item md-size-50" style="border: 1px solid red;">
+       id="popsiclePage">
+    <div class="md-layout-item md-size-50">
       <Editor id="editor" />
     </div>
 
-    <div style="border: 1px solid red;">
+    <div>
       <Preview id="preview" />
     </div>
 

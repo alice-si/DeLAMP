@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-on:click="print">Print</button>
+    <i class="material-icons" id="print-icon" v-on:click="print">print</i>
 
     <div id="preview-content">
       <h3>Legal contract</h3>
@@ -125,6 +125,14 @@ h3 {
   box-shadow: inset 0 0 1px grey;
   text-align: center;
   margin: 20px;
+  margin-top: 103px;
   padding: 10px;
+}
+
+#print-icon {
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 </style>

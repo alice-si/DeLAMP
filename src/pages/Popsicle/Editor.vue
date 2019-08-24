@@ -110,7 +110,6 @@ input {
 
 .editor-section {
   min-height: 92vh;
-  border: 1px solid blue;
 }
 
 .clause {
