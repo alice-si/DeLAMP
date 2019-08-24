@@ -3,34 +3,11 @@
     <div class="md-layout md-size-50 drag-area">
       <div class="md-layout-item md-size-50">
         <h3>Clauses</h3>
-          <draggable
-           class="dragArea list-group"
-           :list="clauses"
-           :group="{ name: 'clauses', pull: 'clone', put: false }"
-           @change="log">
-           <transition-group>
-             <div class="list-group-item md-button clause"
-                  v-for="element in clauses"
-                  :key="element.name">
-                  {{ element.name }}
-             </div>
-           </transition-group>
-         </draggable>
+        <div v-for="(clauseType, idx) in clauses">
+          <clause-component :clauseType="clauseType" :type="idx"/>
+        </div>
       </div>
-      <div class="md-layout-item md-size-50">
-        <h3>Contract</h3>
-        <draggable class="dragArea list-group"
-                   :list="chosenClauses"
-                   group="clauses"
-                   :move="removeClause">
-                   <!-- @change="removeClause" -->
-                   <div class="list-group-item"
-                        v-for="element in chosenClauses"
-                        :key="element.name">
-                        {{ element.name }}
-                  </div>
-        </draggable>
-      </div>
+
       <!-- <rawDisplayer class="md-size-50" :value="list1" title="List 1" />
       <rawDisplayer class="md-size-50" :value="list2" title="List 2" /> -->
     </div>
@@ -40,20 +17,18 @@
 <script>
 let id = 3;
 import draggable from "vuedraggable";
+import Clauses from "@/clauses";
+import ClauseComponent from "./Clause";
 
 export default {
   order: 5,
   components: {
-    draggable
+    draggable,
+    ClauseComponent,
   },
   data() {
     return {
-      clauses: [
-        { name: "Funding", fixed: true, id: 1 },
-        { name: "Investment", fixed: true, id: 2 },
-        { name: "Issuance Protocol", fixed: true, id: 3 },
-        { name: "Validation", fixed: true, id: 4 }
-      ],
+      clauses: [],
       chosenClauses: [
         { name: "Juan", id: 5 },
         { name: "Edgard", id: 6 },
@@ -75,6 +50,10 @@ export default {
       }
       // this.list.splice(idx, 1);
     },
+    fetchClauses: function() {
+      this.clauses = Clauses;
+      console.log(this.clauses);
+    },
     printClauses: function() {
       console.log(this.list);
     },
@@ -85,6 +64,9 @@ export default {
     log: function(e) {
       console.log(e);
     }
+  },
+  beforeMount() {
+    this.fetchClauses();
   }
 };
 </script>

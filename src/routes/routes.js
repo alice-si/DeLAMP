@@ -4,7 +4,7 @@ import Dashboard from "@/pages/Dashboard.vue";
 import SocialProjects from "@/pages/Projects/SocialProjects.vue";
 import Conditions from "@/pages/ConditionsDashboard/Conditions.vue";
 import Wallet from "@/pages/Wallet.vue";
-import Popsicle from "@/pages/Popsicle.vue"
+import Popsicle from "@/pages/Popsicle/Popsicle.vue"
 
 const routes = [
   {

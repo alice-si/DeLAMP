@@ -21,7 +21,6 @@ let conf = {
         popularity: 53,
       }
     ],
-
     'investment': [
       {
         id: 'defaultInvestmentClause',
