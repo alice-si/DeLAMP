@@ -11,7 +11,8 @@ BACKGROUND
 (B) To provide advance funding sufficient to enable the Issuer to undertake the relevant activities, the Issuer has, by resolution of its board of directors passed on {{ max }}, resolved to create up to a maximum nominal amount of £{{ max }} zero coupon unsecured loan notes [YEAR], to be constituted in the manner set out below. Agreed terms
 `,
         arguments: {
-          max: 'number'
+          min_donation: null,
+          max_donation: null,
         },
         tracking: {
           author: '0xc846b6f1C7E6a9320Eb3Bee7f67fDDC0C48e603b',

@@ -44,16 +44,21 @@ export const contracts = {
   init: function() {
     registry = new ethers.Contract(REGISTRY_ADDRESS, registryContract.abi, signer);
     fundingClause = new ethers.Contract(FUNDING_ADDRESS, fundingContract.abi, signer);
-    impactContract = new ethers.Contract(CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
+    impactContract = new ethers.Contract(localStorage.contractAddress || CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
 
     console.log('Clauses registry linked: ' + registry.address);
     console.log('Funding clause linked: ' + fundingClause.address);
     console.log('Impact contract linked: ' + impactContract.address);
   },
-  deployLegalContract: async function() {
+  deployLegalContract: async function(args) {
+    let min = args.min_donation;
+    let max = args.max_donation;
+    console.log('Min: ' + min + " max: " + max);
     let impactContractFactory = new ethers.ContractFactory(impactInvestmentContract.abi, impactInvestmentContract.bytecode, signer);
-    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ARBITER, ['MAX_DONATION'], [20]);
+    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ARBITER, ['MIN_DONATION', 'MAX_DONATION'], [min, max]);
 
+    localStorage.contractAddress = impactContract.address;
+    await contracts.fetchState();
     console.log('Impact contract deployed: ' + impactContract.address);
   },
   fund: async function(amount) {

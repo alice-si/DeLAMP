@@ -55,7 +55,7 @@ import ClausesLarge from "./ClausesLarge";
         expanded: {
           "Funding": true,
           "Investment": false
-        },
+        }
       };
     },
     computed: {

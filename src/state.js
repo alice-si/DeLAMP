@@ -7,10 +7,6 @@ export const state = {
     failures: 0,
     successes: 0
   },
-  parameters: {
-    MIN_DONATION: 'Minimum donation',
-    MAX_DONATION: 'Maximum donation'
-  },
   updates: [],
   exceptions: []
 };
