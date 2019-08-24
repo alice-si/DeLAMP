@@ -41,7 +41,6 @@
                           </div>
                         </template>
                       </stats-card>
-
                </transition-group>
     </draggable>
   </div>
@@ -49,7 +48,7 @@
 <script>
 import draggable from "vuedraggable";
 import ClausesConfig from "@/clausesConfig";
-import state from "@/state";
+import { state } from "../../state.js";
 import { StatsCard } from "@/components";
 import MarqueeText from 'vue-marquee-text-component';
 
@@ -72,17 +71,6 @@ export default {
     return {
       selectedClauses: [],
       clauseIcons: null,
-      trackingFields: [
-        ['Author', 'author'],
-        ['Auditor', 'auditor'],
-        ['Author fee', 'authorFee'],
-        ['Auditor fee', 'auditorFee'],
-        ['Registry fee', 'registryFee'],
-        ['Price', 'price'],
-        ['Success count', 'successCount'],
-        ['Failure count', 'failureCount'],
-
-      ]
     }
   },
   components: {
@@ -102,10 +90,11 @@ export default {
         return value.substring(0, 7) + '...' + value.substring(value.length - 7);
       }
       return value;
-    }
+    },
   },
   beforeMount() {
     this.fetchClauses();
+    this.fetchContract();
   }
 };
 </script>
