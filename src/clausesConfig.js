@@ -56,7 +56,7 @@ When a Noteholder transfers or redeems part only of their Notes, the old certifi
         id: 'defaultInvestmentClause',
         title: 'Default Investment Clause',
         legalContent: `
-Register
+Register {{ min }}, {{ max }}
 The Issuer shall, at all times, keep the Register at its registered office (or at such other place as the Issuer may from time to time have appointed for the purpose and have notified to the Noteholders).
 The Register shall contain the following details:
 the names and addresses of the Noteholders for the time being;

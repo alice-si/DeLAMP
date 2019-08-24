@@ -37,9 +37,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #popsiclePage {
   min-height: 92vh;
+}
+
+.highlighted {
+  /* background-color: lightgreen; */
+  font-size: 30px !important;
 }
 
 /* #generate-button-container {
