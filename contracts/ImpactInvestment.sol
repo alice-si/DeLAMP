@@ -14,8 +14,9 @@ contract ImpactInvestment is LegalContract {
     BaseClause public validationClause;
     BaseClause public redemptionClause;
 
-    constructor(ClauseRegistry _registry, BaseClause _fundingClause, string[] memory valNames, uint256[] memory values) LegalContract(_registry) public {
+    constructor(ClauseRegistry _registry, BaseClause _fundingClause, address _arbiter, string[] memory valNames, uint256[] memory values) LegalContract(_registry) public {
         fundingClause = _fundingClause;
+        setRole('ARBITER', _arbiter);
         for (uint i=0; i<valNames.length; i++) {
             setValue(valNames[i], values[i]);
         }

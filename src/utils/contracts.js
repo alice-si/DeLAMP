@@ -9,11 +9,14 @@ const fundingContract = require('../../build/contracts/OpenFunding.json');
 
 const AUTHOR = '0x0432043bE8CAbbA7df8759d6E9cE8Aa5Fcc4B009';
 
+//TODO: Replace with own ganache address
+const ARBITER = '0xCa9267EC6C6a127606A047c2cf2D152E6fE387A1';
+
 const REGISTRY_ADDRESS= '0x4e0D6436f82c9D7B17c4f62d30c615Dd7756471D';
 const FUNDING_ADDRESS = '0x2f106A81d1fD5BED5bBF8b03C425E013CD277323';
-const CONTRACT_ADDRESS = '0xc215b616A33E011e2481Cc199b5a1e761EDA99B0';
+const CONTRACT_ADDRESS = '0xb0899fedB841476A928d76b6B78635687B376f2A';
 
-var provider, signer, impactContract, registry, fundingClause;
+var provider, signer, impactContract, registry, fundingClause, disputeManager;
 
 const injectedWeb3 = window.web3;
 if (typeof injectedWeb3 !== "undefined") {
@@ -47,11 +50,12 @@ export const contracts = {
   },
   deployLegalContract: async function() {
     let impactContractFactory = new ethers.ContractFactory(impactInvestmentContract.abi, impactInvestmentContract.bytecode, signer);
-    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ['MAX_DONATION'], [20]);
+    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ARBITER, ['MAX_DONATION'], [20]);
 
     console.log('Impact contract deployed: ' + impactContract.address);
   },
   fund: async function(amount) {
+    await this.fetchState();
     let before = state.contract.successes;
     await impactContract.fund(amount, {value: 125});
     await this.fetchState();
@@ -62,9 +66,45 @@ export const contracts = {
     let result = await registry.getStats(fundingClause.address);
     state.contract.failures = result.failure;
     state.contract.successes = result.success;
+    state.contract.min = await impactContract.getValue('MIN_DONATION');
+    state.contract.max = await impactContract.getValue('MAX_DONATION');
+
     console.log("Funded: " + state.contract.funded);
     console.log("Failures: " + state.contract.failures);
     console.log("Succeses: " + state.contract.successes);
+    console.log("MIN: " + state.contract.min);
+    console.log("MAX: " + state.contract.max);
+  },
+  fetchExceptions: async function() {
+    let dmAddress = await impactContract.disputeManager();
+    disputeManager = new ethers.Contract(dmAddress, disputeManagerContract.abi, signer);
+
+    let arbiter = await impactContract.getRole('ARBITER');
+    let currentAccount = await signer.getAddress();
+
+    state.exceptions.length = 0;
+    let count = (await disputeManager.getDisputesCount()).valueOf();
+    for(var i=0; i<count; i++) {
+      let exception = await disputeManager.getDispute(i);
+      state.exceptions.push({
+        id: i,
+        clause: 'Funding',
+        value: parseInt('0x'+exception[1].substring(10)),
+        resolved: exception[2],
+        canResolve: arbiter === currentAccount
+      })
+    }
+
+    console.log("Arbiter: " + arbiter);
+    console.log("Current: " + currentAccount);
+    console.log(count);
+  },
+  resolve: async function(index) {
+    console.log("Resolving: " + index);
+    await impactContract.appeal(index);
+
+    await this.fetchExceptions();
+    await this.fetchState();
   }
 
   // deployCatalog: async function() {
@@ -183,4 +223,5 @@ export const contracts = {
 
 };
 contracts.init();
+contracts.fetchState();
 

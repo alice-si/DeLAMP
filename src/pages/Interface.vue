@@ -12,7 +12,7 @@
                             <md-tab md-label="Funding" md-icon="cloud_upload">
                                 <md-card class="md-card-profile">
                                     <md-card-content>
-                                        <h6 class="category text-gray">Execute donation</h6>
+                                        <h6 class="category text-gray">Execute donation (MIN: {{s.min}} MAX: {{s.max}})</h6>
                                         <h4 class="card-title">Send funds to the contract escrow</h4>
 
                                         <md-field>
@@ -86,8 +86,8 @@
     },
     methods: {
       test: async function() {
-        await contracts.deployClausesRegistry();
-        await contracts.deployFundingClause();
+        //await contracts.deployClausesRegistry();
+        //await contracts.deployFundingClause();
         console.log("DEPLOYING legal contract");
         await contracts.deployLegalContract();
       },
@@ -109,6 +109,7 @@
         form: {
           value: null
         },
+        s: state.contract
       };
     }
   };
