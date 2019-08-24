@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
-    <draggable class="dragArea list-group"
+    <!-- <md-list-item class="md-inset"> -->
+    <draggable class="dragArea list-group" 
                v-bind:style="{ 'background-color': color[0] }"
                :list="clauses"
                :group="{ name: 'clauses', pull: 'clone', put: false }"
@@ -31,6 +32,8 @@
                  </div>
                </transition-group>
     </draggable>
+    <!-- </md-list-item> -->
+    
   </div>
 </template>
 <script>

@@ -2,8 +2,11 @@
   <div class="md-layout">
     <div class="md-layout-item md-size-50 editor-section">
       <h3>Clauses</h3>
+
       <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
-        <h4>{{ typeOfClause }}</h4>
+        <h4 class="md-list-item-text">
+              {{ typeOfClause }}
+        </h4>
         <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]"/>
       </div>
 

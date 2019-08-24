@@ -1,12 +1,12 @@
 <template>
   <div class="md-layout md-size-100"
        id="popsiclePage">
-    <div class="md-layout-item md-size-50">
+    <div class="md-layout-item md-size-60">
       <Editor id="editor" />
     </div>
 
     <div>
-      <Preview id="preview" />
+      <Preview id="preview" class="md-layout-item md-size-35" />
     </div>
 
     <div id="generate-button-container">
