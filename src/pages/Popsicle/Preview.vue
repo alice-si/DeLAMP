@@ -1,6 +1,12 @@
 <template>
   <div>
-    <i class="material-icons" id="print-icon" v-on:click="print">print</i>
+    <!-- <i class="material-icons" id="print-icon" v-on:click="print">print</i> -->
+    <md-button
+      class="add-condition md-fab" 
+      style="background-color: #1CB8C4 !important;"
+      v-on:click="print" id="print-button">
+      <md-icon style="margin-left: -18px">print</md-icon>
+    </md-button>
 
     <div id="preview-content">
       <h3>Legal contract</h3>
@@ -129,7 +135,7 @@ h3 {
   padding: 10px;
 }
 
-#print-icon {
+#print-button {
   cursor: pointer;
   position: fixed;
   bottom: 20px;

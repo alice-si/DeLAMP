@@ -42,10 +42,10 @@ export default {
   min-height: 92vh;
 }
 
-#generate-button-container {
+/* #generate-button-container {
   position: fixed;
   bottom: 50px;
   right: 50px;
-}
+} */
 
 </style>

@@ -4,9 +4,19 @@
       Can't be deployed yet
     </button> -->
 
-    <button v-show="canBeDeployed" id="generate-button">
+    <!-- <button v-if="canBeDeployed" id="generate-button">
       Deploy and print
-    </button>
+    </button> -->
+
+    <md-button
+      v-if="canBeDeployed"
+      class="add-condition md-fab" 
+      style="background-color: #1CB8C4 !important;"
+      v-on:click="deploy" id="deploy-button">
+      <md-icon style="margin-left: -18px">cloud_upload</md-icon>
+    </md-button>
+
+    
   </div>
 </template>
 <script>
@@ -20,28 +30,29 @@ export default {
   },
   data() {
     return {
-      state,
+      selected: state.selected,
     };
   },
   computed: {
     canBeDeployed() {
-      this.state.selected.length >= clausesConfig.types.length;
+      return this.selected.length >= clausesConfig.types.length;
     }
   },
   methods: {
+    deploy() {
+      alert('Deploy will be implemented');
+    }
   }
 };
 </script>
 
 <style scoped>
-#generate-button {
-  background-color: lightgreen;
+
+#deploy-button {
+  position: fixed;
+  bottom: 20px;
+  right: 70px;
   cursor: pointer;
 }
 
-button {
-  padding: 10px;
-  border-radius: 5px;
-  font-size: large;
-}
 </style>
