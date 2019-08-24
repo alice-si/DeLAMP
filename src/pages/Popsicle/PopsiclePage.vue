@@ -37,9 +37,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #popsiclePage {
   min-height: 92vh;
+}
+
+.highlighted {
+  background-color: yellow;
+  /* font-size: 16px !important; */
+  transition: all 1s ease-in-out;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 
 /* #generate-button-container {

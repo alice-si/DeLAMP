@@ -14,7 +14,9 @@
         v-for="clauseType in clausesTypes"
         :key="clauseType"
         :type="rendered[clauseType].type"
-        :text="rendered[clauseType].text"
+        :template="rendered[clauseType].legalContent"
+        :passedArguments="rendered[clauseType].arguments"
+        :changedArguments="rendered[clauseType].changedArguments"
         :highlighted="rendered[clauseType].highlighted" />
     </div>
   </div>
@@ -25,12 +27,11 @@ import Vue from 'vue';
 import {state} from '@/state';
 import clausesConfig from '@/clausesConfig';
 import LegalClausePreview from './LegalClausePreview';
-import { setInterval } from 'timers';
 import Mustache from 'mustache';
 import printContract from '@/utils/printContract';
 
 const INTERVAL_MS = 1000;
-const HIGHLIGHTING_MS = 1000;
+
 
 function getClauseDetails(id) {
   for (let clauseType of clausesConfig.types) {
@@ -43,9 +44,9 @@ function getClauseDetails(id) {
 }
 
 function createNewLegalClause(clauseDetails, args) {
-  let result = Object.assign({}, clauseDetails);
-  result.args = args || {};
-  result.text = renderText(result.legalContent, result.args);
+  let result = JSON.parse(JSON.stringify(clauseDetails));
+  result.arguments = args || {};
+  result.text = renderText(result.legalContent, result.arguments);
   return result;
 }
 
@@ -54,19 +55,30 @@ function renderText(template, args) {
 }
 
 function clausesEqual(oldClause, newClause) {
-  return oldClause.text === newClause.text;
+  return JSON.stringify(oldClause.arguments) == JSON.stringify(newClause.arguments);
+  // return oldClause.text != newClause.text;
 }
 
 // Update with highlighting
 function updateClause(type, clause, data) {
-  clause.highlighted = true;
-  clause.highlightingStarted = Date.now();
-  Vue.set(data.rendered, type, clause);
-  setTimeout(function () {
-    if (Date.now() - data.rendered[type].highlightingStarted > HIGHLIGHTING_MS) {
-      Vue.set(data.rendered[type], 'highlighted', false);
+  // clause.highlighted = true;
+  // clause.highlightingStarted = Date.now();
+  Vue.set(data.rendered, type, JSON.parse(JSON.stringify(clause)));
+  // setTimeout(function () {
+  //   if (Date.now() - data.rendered[type].highlightingStarted > HIGHLIGHTING_MS) {
+  //     Vue.set(data.rendered[type], 'highlighted', false);
+  //   }
+  // }, HIGHLIGHTING_MS);
+}
+
+function getChangedArguments(oldClause, newClause) {
+  let changed = [];
+  for (let argName in oldClause.arguments) {
+    if (oldClause.arguments[argName] != newClause.arguments[argName]) {
+      changed.push(argName);
     }
-  }, HIGHLIGHTING_MS);
+  }
+  return changed;
 }
 
 function watchChanges(data) {
@@ -76,6 +88,7 @@ function watchChanges(data) {
       let oldLegalClause = data.rendered[clauseDetails.type];
       let newLegalClause = createNewLegalClause(clauseDetails, selectedClause.arguments);
       if (!clausesEqual(oldLegalClause, newLegalClause)) {
+        newLegalClause.changedArguments = getChangedArguments(oldLegalClause, newLegalClause);
         updateClause(clauseDetails.type, newLegalClause, data);
       }
     }
@@ -100,6 +113,8 @@ export default {
       rendered[type] = {
         text: '',
         type,
+        arguments: {},
+        changedArguments: [],
         highlighted: false,
       };
     }

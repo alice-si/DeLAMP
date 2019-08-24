@@ -1,9 +1,11 @@
 <template>
   <div>
     <h4 style="font-weight: 600;">&#167; {{ type }}</h4>
-    <p class="clause-text" v-bind:class="{ highlighted }" style="margin-top: -5px;">
+    <p class="clause-text" v-html="getContentHtml" style="margin-top: -5px;">
       <!-- {{ text || 'Empty' }} -->
-      <VueTyper v-if="text" :typeDelay="0" :pre-type-delay="1" :text="text" :repeat="0" caret-animation='blink'  />
+      <!-- <VueTyper v-if="text" :typeDelay="0" :pre-type-delay="1" :text="text" :repeat="0" caret-animation='blink'  /> -->
+      <!-- {{ JSON.stringify(template) }}
+      {{ JSON.stringify(passedArguments) }} -->
     </p>
   </div>
 
@@ -11,6 +13,17 @@
 
 <script>
 import { VueTyper } from 'vue-typer'
+import { setTimeout } from 'timers';
+
+const HIGHLIGHTING_MS = 3000;
+
+function replace(str, oldVal, newVal) {
+  return str.split(oldVal).join(newVal);
+}
+
+function setTimerToDisableHighlighting(elemHtml) {
+  
+}
 
 export default {
   name: "LegalClausePreview",
@@ -18,13 +31,40 @@ export default {
     VueTyper,
   },
   props: {
-    type: '',
-    text: '',
-    highlighted: false,
+    type: String,
+    template: String,
+    passedArguments: Object,
+    // highlighted: Boolean,
+    changedArguments: Array,
+  },
+  computed: {
+    getContentHtml() {
+      let result = this.template;
+      for (let passedArgumentName in this.passedArguments) {
+        let updated = this.oldArguments[passedArgumentName] == this.passedArguments[passedArgumentName];
+        let className = this.changedArguments.includes(passedArgumentName) ? 'highlighted' : '';
+        let passedArgumentVal = `<span class="${className}">${this.passedArguments[passedArgumentName]}</span>`;
+        if (updated) {
+          setTimerToDisableHighlighting(passedArgumentVal);
+        }
+        result = replace(result, '{{ ' + passedArgumentName + ' }}', passedArgumentVal);
+      }
+      
+      setTimeout(function() {
+        var elems = document.querySelectorAll(".highlighted");
+
+        [].forEach.call(elems, function(el) {
+            el.classList.remove("highlighted");
+        });
+      }, HIGHLIGHTING_MS);
+
+
+      return result;
+    }
   },
   data() {
-
     return {
+      oldArguments: {}
     };
   },
 };
@@ -41,11 +81,4 @@ export default {
     margin-top: 0;
 }
 
-.highlighted {
-  /* background-color: lightgreen; */
-}
-
-span.caret {
-  /* display: none; */
-}
 </style>

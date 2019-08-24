@@ -13,7 +13,6 @@
                   <md-list style="background: transparent !important;">
                     <md-list-item md-expand>
                     <marquee-text :duration="6"
-                                  :repeat="1"
                                   v-if="clause.title.length > 15">
                       <h4 style="color: #fff;">{{ clause.title }} </h4>
                     </marquee-text>
@@ -66,18 +65,14 @@ export default {
     addClause: function(evt) {
       if(evt.added) {
         let newClause = evt.added.element;
-        console.log(newClause);
         this.empty = false;
         this.globalSelectedClauses.push(newClause);
         Vue.set(state, 'selected', JSON.parse(JSON.stringify(this.globalSelectedClauses)));
-        console.log(this.globalSelectedClauses);
-        console.log(state.selected);
       }
     },
     processClauseChange () {
       this.globalSelectedClauses = this.selectedClauses;
       Vue.set(state, 'selected', this.selectedClauses);
-      console.log(state.selected);
     }
   },
   name: "ClausesLarge",
