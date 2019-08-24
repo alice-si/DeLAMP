@@ -5,9 +5,9 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
 
-      <sidebar-link to="/social-projects">
+      <sidebar-link to="/popsicle">
         <md-icon>bubble_chart</md-icon>
-        <p>Social Projects</p>
+        <p>Popsicle</p>
       </sidebar-link>
       <sidebar-link to="/conditions">
         <md-icon>person</md-icon>
