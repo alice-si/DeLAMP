@@ -16,7 +16,8 @@
                       {{arg_name}}
                     </label>
                     <md-input style="color: #fff !important"
-                              v-model="clause.arguments[arg_name]"></md-input>
+                              v-model="clause.arguments[arg_name]"
+                              v-on:change="processClauseChange"></md-input>
                   </md-field>
              </div>
              <span>Selected Clauses: {{ selectedClauses }}</span>
@@ -26,7 +27,8 @@
 <script>
 import draggable from "vuedraggable";
 import ClausesConfig from "@/clausesConfig";
-import state from "@/state";
+import { state } from "../../state.js";
+import Vue from "vue";
 
 export default {
   props: {
@@ -38,6 +40,7 @@ export default {
   data: function() {
     return {
       selectedClauses: [],
+      globalSelectedClauses: state.selected,
     }
   },
   components: {
@@ -46,24 +49,19 @@ export default {
   methods: {
     addClause: function(evt) {
       if(evt.added) {
-        console.log("in cond");
-        console.log(evt);
+        let newClause = evt.added.element;
+        this.globalSelectedClauses.push(newClause);
+        Vue.set(state, 'selected', JSON.parse(JSON.stringify(this.globalSelectedClauses)));
+        console.log(this.globalSelectedClauses);
+        console.log(state.selected);
       }
-    }
-  },
-  computed: {
-        selectedClauses () {
-            return parse(this.userInput)
-        }
-  },
-  methods: {
-    process () {
-      serverProcess(this.parsedInput);
-    }
-  },
-  watch: {
-    selectedClauses() {
-      this.process();
+    },
+    processClauseChange () {
+      // console.log(this.selectedClauses);
+      // console.log(this.globalSelectedClauses);
+      this.globalSelectedClauses = this.selectedClauses;
+      Vue.set(state, 'selected', this.selectedClauses);
+      console.log(state.selected);
     }
   },
   name: "ClausesLarge",
