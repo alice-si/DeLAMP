@@ -3,7 +3,7 @@
     <!-- <h3>{{ type }} !-->
     <p class="clause-text" v-bind:class="{ highlighted }">
       <!-- {{ text || 'Empty' }} -->
-      <VueTyper v-if="text" :typeDelay=20 :text="text" :repeat=0  />
+      <VueTyper v-if="text" :typeDelay="0" :pre-type-delay="1" :text="text" :repeat="0" caret-animation='blink'  />
     </p>
   </div>
   
@@ -23,12 +23,6 @@ export default {
     highlighted: false,
   },
   data() {
-    if (this.highlighted) {
-      var typed = new Typed(".element", {
-        strings: ["<i>First</i> sentence.", "&amp; a second sentence."],
-        typeSpeed: 40
-      });
-    }
 
     return {
     };
@@ -51,6 +45,6 @@ export default {
 }
 
 span.caret {
-  display: none;
+  /* display: none; */
 }
 </style>

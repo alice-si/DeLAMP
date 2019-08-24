@@ -129,10 +129,11 @@ h3 {
   height: 600px;
   background-color: white;
   box-shadow: inset 0 0 1px grey;
-  text-align: center;
-  margin: 20px;
+  /* text-align: center; */
+  margin: 10px;
   margin-top: 103px;
   padding: 10px;
+  overflow: scroll;
 }
 
 #print-button {
