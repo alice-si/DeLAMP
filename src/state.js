@@ -1,8 +1,6 @@
 
 export const state = {
-  conditions: [],
-  hgContract: {},
-  hgRegistry: {},
+  selected: [],
   projects: [
     {
       code: "UNEMPLOYMENT",

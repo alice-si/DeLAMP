@@ -1,6 +1,6 @@
 let conf = {
   clauses: {
-    'funding': [
+    'Funding': [
       {
         id: 'donation',
         title: 'donation',
@@ -21,7 +21,7 @@ let conf = {
         popularity: 53,
       }
     ],
-    'investment': [
+    'Investment': [
       {
         id: 'defaultInvestmentClause',
         title: 'Default Investment Clause',
@@ -35,6 +35,11 @@ let conf = {
         popularity: 88,
       },
     ]
+  },
+  colours: {
+    'Funding' : ['#90caf9', '#42a5f5'],//_colors.scss $blue-200
+    'Investment' : ['#80cbc4', '#26a69a'], //_colors.scss $teal-200
+
   }
 };
 

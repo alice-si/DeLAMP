@@ -429,7 +429,7 @@ select.form-control {
   }
 
   &:before{
-    background-color: $brand-primary !important;
+    background-color: $white-color !important;
   }
 
   &.md-focused label,
@@ -448,7 +448,7 @@ select.form-control {
 
   &.md-has-textarea:not(.md-autogrow):before{
     border-bottom: 2px solid transparent;
-    border-color: $brand-primary !important;
+    border-color: $white-color !important;
     transform: scaleX(.12);
   }
 

@@ -1,6 +1,8 @@
 <template>
-  <div class="md-layout md-size-100" style="border: 1px solid blue">
-    <div style="border: 1px solid red;">
+  <div class="md-layout md-size-100"
+       id="popsiclePage"
+       style="border: 1px solid blue">
+    <div class="md-layout-item md-size-50" style="border: 1px solid red;">
       <Editor id="editor" />
     </div>
 
@@ -37,6 +39,10 @@ export default {
 </script>
 
 <style scoped>
+#popsiclePage {
+  min-height: 92vh;
+}
+
 #generate-button-container {
   position: fixed;
   bottom: 50px;

@@ -1,8 +1,19 @@
 <template>
-  <div>
-    <h3>Clauses</h3>
-    <div v-for="(clauseType, idx) in clauses">
-      <ClauseSmall :clauseType="clauseType" :type="idx"/>
+  <div class="md-layout">
+    <div class="md-layout-item md-size-50 editor-section">
+      <h3>Clauses</h3>
+      <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
+        <h4>{{ typeOfClause }}</h4>
+        <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]"/>
+      </div>
+
+    </div>
+    <div class="md-layout-item md-size-50 editor-section">
+      <h3>Contract</h3>
+      <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
+        <h4>{{ typeOfClause }}</h4>
+        <ClausesLarge :color="clauseColours[typeOfClause]"/>
+      </div>
     </div>
   </div>
 </template>
@@ -10,22 +21,25 @@
 
 import draggable from "vuedraggable";
 import Clauses from "@/clausesConfig";
-import ClauseSmall from "./ClauseSmall";
+import ClausesSmall from "./ClausesSmall";
+import ClausesLarge from "./ClausesLarge";
 
   export default {
     order: 5,
     components: {
       draggable,
-      ClauseSmall,
+      ClausesSmall,
+      ClausesLarge,
     },
     data() {
       return {
-        clauses: [],
+        clauseGroups: [],
         chosenClauses: [
           { name: "Juan", id: 5 },
           { name: "Edgard", id: 6 },
           { name: "Johnson", id: 7 },
         ],
+        clauseColours: [],
         // dragging: false
       };
     },
@@ -43,8 +57,8 @@ import ClauseSmall from "./ClauseSmall";
         // this.list.splice(idx, 1);
       },
       fetchClauses: function() {
-        this.clauses = Clauses;
-        console.log(this.clauses);
+        this.clauseGroups = Clauses.clauses;
+        this.clauseColours = Clauses.colours;
       },
       printClauses: function() {
         console.log(this.list);
@@ -92,6 +106,11 @@ input {
 
 .drag-area {
   width: 50%;
+}
+
+.editor-section {
+  min-height: 92vh;
+  border: 1px solid blue;
 }
 
 .clause {
