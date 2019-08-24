@@ -43,8 +43,13 @@ export default {
 }
 
 .highlighted {
-  /* background-color: lightgreen; */
-  font-size: 30px !important;
+  background-color: yellow;
+  /* font-size: 16px !important; */
+  transition: all 1s ease-in-out;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 
 /* #generate-button-container {

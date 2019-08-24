@@ -31,7 +31,7 @@ import Mustache from 'mustache';
 import printContract from '@/utils/printContract';
 
 const INTERVAL_MS = 1000;
-const HIGHLIGHTING_MS = 1000;
+
 
 function getClauseDetails(id) {
   for (let clauseType of clausesConfig.types) {

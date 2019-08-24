@@ -13,9 +13,16 @@
 
 <script>
 import { VueTyper } from 'vue-typer'
+import { setTimeout } from 'timers';
+
+const HIGHLIGHTING_MS = 3000;
 
 function replace(str, oldVal, newVal) {
   return str.split(oldVal).join(newVal);
+}
+
+function setTimerToDisableHighlighting(elemHtml) {
+  
 }
 
 export default {
@@ -37,8 +44,21 @@ export default {
         let updated = this.oldArguments[passedArgumentName] == this.passedArguments[passedArgumentName];
         let className = this.changedArguments.includes(passedArgumentName) ? 'highlighted' : '';
         let passedArgumentVal = `<span class="${className}">${this.passedArguments[passedArgumentName]}</span>`;
+        if (updated) {
+          setTimerToDisableHighlighting(passedArgumentVal);
+        }
         result = replace(result, '{{ ' + passedArgumentName + ' }}', passedArgumentVal);
       }
+      
+      setTimeout(function() {
+        var elems = document.querySelectorAll(".highlighted");
+
+        [].forEach.call(elems, function(el) {
+            el.classList.remove("highlighted");
+        });
+      }, HIGHLIGHTING_MS);
+
+
       return result;
     }
   },
