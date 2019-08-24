@@ -1,0 +1,779 @@
+{
+  "contractName": "CommissionerFunding",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "num",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "fund",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"num\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"fund\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/dhen/Documents/Alice/popsicle/contracts/CommissionerFunding.sol\":\"CommissionerFunding\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/dhen/Documents/Alice/popsicle/contracts/BaseClause.sol\":{\"keccak256\":\"0x8091247b7c20f41180de932293cb37ea18cf3728d00bb7b801fa404ac23cdbdd\",\"urls\":[\"bzzr://ac3f53baac4b44210a2ee6e0324e00eabf7c8bd8906612274d08ecbfaf6a7175\"]},\"/Users/dhen/Documents/Alice/popsicle/contracts/ClauseRegistry.sol\":{\"keccak256\":\"0xdbf771ba0a6022032e48493762f833bdb02fcb2a65fd5b410ffec9bcc733df7d\",\"urls\":[\"bzzr://105e93debc018c6104269713fbc661953cca66952844ea936b53d80a3cfa65d0\"]},\"/Users/dhen/Documents/Alice/popsicle/contracts/CommissionerFunding.sol\":{\"keccak256\":\"0xeee8c2dde9a7493f8485d0505db8f2309fd3fd72072795bda3b819bb28e870cd\",\"urls\":[\"bzzr://cfcd8433b5f3f48c8b30b2018b1d526f739a074b286cb30db78d374f8caa6fe3\"]},\"/Users/dhen/Documents/Alice/popsicle/contracts/DisputeManager.sol\":{\"keccak256\":\"0xc214fe0546c8499bd85701b8990054de4fce182e9cb7ec27c436489c67540264\",\"urls\":[\"bzzr://a1fdbfb221df8d5bd1fa50d4a0096ea56c05723daff3bf0a38cec9e6f25abea6\"]},\"/Users/dhen/Documents/Alice/popsicle/contracts/IFunding.sol\":{\"keccak256\":\"0x277337a615374b7ce1cf00149217c696fa6a21e0da500ef256407d86604e79d0\",\"urls\":[\"bzzr://1145c5f0100a211fd9cf313b0f010fec405ff46cf66a05d57f1f6b830d2b7a7b\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610105806100206000396000f3fe60806040526004361060265760003560e01c80634e70b1dc14602b578063ca1d209d146053575b600080fd5b348015603657600080fd5b50603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506084565b005b60045481565b600060405180807f4d41585f444f4e4154494f4e0000000000000000000000000000000000000000815250600c01905090815260200160405180910390205481111560ce57600080fd5b607b6004819055505056fea165627a7a72305820304a02abb040cd835f80747f285d7f9b7361266e4caf3406c4c2acc6e28ab83a0029",
+  "deployedBytecode": "0x60806040526004361060265760003560e01c80634e70b1dc14602b578063ca1d209d146053575b600080fd5b348015603657600080fd5b50603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506084565b005b60045481565b600060405180807f4d41585f444f4e4154494f4e0000000000000000000000000000000000000000815250600c01905090815260200160405180910390205481111560ce57600080fd5b607b6004819055505056fea165627a7a72305820304a02abb040cd835f80747f285d7f9b7361266e4caf3406c4c2acc6e28ab83a0029",
+  "sourceMap": "79:208:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;79:208:2;;;;;;;",
+  "deployedSourceMap": "79:208:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;139:15;;8:9:-1;5:2;;;30:1;27;20:12;5:2;139:15:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;161:124;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;161:124:2;;;;;;;;;;;;;;;;;:::i;:::-;;139:15;;;;:::o;161:124::-;236:6;:22;;;;;;;;;;;;;;;;;;;;;;;;;225:7;:33;;217:42;;;;;;275:3;269;:9;;;;161:124;:::o",
+  "source": "\npragma solidity ^0.5.2;\n\nimport './IFunding.sol';\nimport './BaseClause.sol';\n\ncontract CommissionerFunding is IFunding, BaseClause {\n\n    uint public num;\n\n    function fund(uint256 _amount) public payable {\n        require(_amount <= values['MAX_DONATION']);\n        num = 123;\n    }\n}\n",
+  "sourcePath": "/Users/dhen/Documents/Alice/popsicle/contracts/CommissionerFunding.sol",
+  "ast": {
+    "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/CommissionerFunding.sol",
+    "exportedSymbols": {
+      "CommissionerFunding": [
+        172
+      ]
+    },
+    "id": 173,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 145,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1:23:2"
+      },
+      {
+        "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/IFunding.sol",
+        "file": "./IFunding.sol",
+        "id": 146,
+        "nodeType": "ImportDirective",
+        "scope": 173,
+        "sourceUnit": 260,
+        "src": "26:24:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/BaseClause.sol",
+        "file": "./BaseClause.sol",
+        "id": 147,
+        "nodeType": "ImportDirective",
+        "scope": 173,
+        "sourceUnit": 17,
+        "src": "51:26:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 148,
+              "name": "IFunding",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 259,
+              "src": "111:8:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IFunding_$259",
+                "typeString": "contract IFunding"
+              }
+            },
+            "id": 149,
+            "nodeType": "InheritanceSpecifier",
+            "src": "111:8:2"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 150,
+              "name": "BaseClause",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 16,
+              "src": "121:10:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BaseClause_$16",
+                "typeString": "contract BaseClause"
+              }
+            },
+            "id": 151,
+            "nodeType": "InheritanceSpecifier",
+            "src": "121:10:2"
+          }
+        ],
+        "contractDependencies": [
+          16,
+          259
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 172,
+        "linearizedBaseContracts": [
+          172,
+          16,
+          259
+        ],
+        "name": "CommissionerFunding",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 153,
+            "name": "num",
+            "nodeType": "VariableDeclaration",
+            "scope": 172,
+            "src": "139:15:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 152,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "139:4:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 170,
+              "nodeType": "Block",
+              "src": "207:78:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 163,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 159,
+                          "name": "_amount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 155,
+                          "src": "225:7:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<=",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 160,
+                            "name": "values",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 7,
+                            "src": "236:6:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_uint256_$",
+                              "typeString": "mapping(string memory => uint256)"
+                            }
+                          },
+                          "id": 162,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "hexValue": "4d41585f444f4e4154494f4e",
+                            "id": 161,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "243:14:2",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_41e6d93bb6f7efd868c2393219e906c9f08a041d92f289a2542ae84d392a4d40",
+                              "typeString": "literal_string \"MAX_DONATION\""
+                            },
+                            "value": "MAX_DONATION"
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "236:22:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "225:33:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 158,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        649,
+                        650
+                      ],
+                      "referencedDeclaration": 649,
+                      "src": "217:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 164,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "217:42:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 165,
+                  "nodeType": "ExpressionStatement",
+                  "src": "217:42:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 168,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 166,
+                      "name": "num",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 153,
+                      "src": "269:3:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "313233",
+                      "id": 167,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "275:3:2",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_123_by_1",
+                        "typeString": "int_const 123"
+                      },
+                      "value": "123"
+                    },
+                    "src": "269:9:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 169,
+                  "nodeType": "ExpressionStatement",
+                  "src": "269:9:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 171,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fund",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 155,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 171,
+                  "src": "175:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 154,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "175:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "174:17:2"
+            },
+            "returnParameters": {
+              "id": 157,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "207:0:2"
+            },
+            "scope": 172,
+            "src": "161:124:2",
+            "stateMutability": "payable",
+            "superFunction": 258,
+            "visibility": "public"
+          }
+        ],
+        "scope": 173,
+        "src": "79:208:2"
+      }
+    ],
+    "src": "1:287:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/CommissionerFunding.sol",
+    "exportedSymbols": {
+      "CommissionerFunding": [
+        172
+      ]
+    },
+    "id": 173,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 145,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1:23:2"
+      },
+      {
+        "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/IFunding.sol",
+        "file": "./IFunding.sol",
+        "id": 146,
+        "nodeType": "ImportDirective",
+        "scope": 173,
+        "sourceUnit": 260,
+        "src": "26:24:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/dhen/Documents/Alice/popsicle/contracts/BaseClause.sol",
+        "file": "./BaseClause.sol",
+        "id": 147,
+        "nodeType": "ImportDirective",
+        "scope": 173,
+        "sourceUnit": 17,
+        "src": "51:26:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 148,
+              "name": "IFunding",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 259,
+              "src": "111:8:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IFunding_$259",
+                "typeString": "contract IFunding"
+              }
+            },
+            "id": 149,
+            "nodeType": "InheritanceSpecifier",
+            "src": "111:8:2"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 150,
+              "name": "BaseClause",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 16,
+              "src": "121:10:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BaseClause_$16",
+                "typeString": "contract BaseClause"
+              }
+            },
+            "id": 151,
+            "nodeType": "InheritanceSpecifier",
+            "src": "121:10:2"
+          }
+        ],
+        "contractDependencies": [
+          16,
+          259
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 172,
+        "linearizedBaseContracts": [
+          172,
+          16,
+          259
+        ],
+        "name": "CommissionerFunding",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 153,
+            "name": "num",
+            "nodeType": "VariableDeclaration",
+            "scope": 172,
+            "src": "139:15:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 152,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "139:4:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 170,
+              "nodeType": "Block",
+              "src": "207:78:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 163,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 159,
+                          "name": "_amount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 155,
+                          "src": "225:7:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<=",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 160,
+                            "name": "values",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 7,
+                            "src": "236:6:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_uint256_$",
+                              "typeString": "mapping(string memory => uint256)"
+                            }
+                          },
+                          "id": 162,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "hexValue": "4d41585f444f4e4154494f4e",
+                            "id": 161,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "243:14:2",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_41e6d93bb6f7efd868c2393219e906c9f08a041d92f289a2542ae84d392a4d40",
+                              "typeString": "literal_string \"MAX_DONATION\""
+                            },
+                            "value": "MAX_DONATION"
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "236:22:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "225:33:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 158,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        649,
+                        650
+                      ],
+                      "referencedDeclaration": 649,
+                      "src": "217:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 164,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "217:42:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 165,
+                  "nodeType": "ExpressionStatement",
+                  "src": "217:42:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 168,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 166,
+                      "name": "num",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 153,
+                      "src": "269:3:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "313233",
+                      "id": 167,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "275:3:2",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_123_by_1",
+                        "typeString": "int_const 123"
+                      },
+                      "value": "123"
+                    },
+                    "src": "269:9:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 169,
+                  "nodeType": "ExpressionStatement",
+                  "src": "269:9:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 171,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fund",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 155,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 171,
+                  "src": "175:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 154,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "175:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "174:17:2"
+            },
+            "returnParameters": {
+              "id": 157,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "207:0:2"
+            },
+            "scope": 172,
+            "src": "161:124:2",
+            "stateMutability": "payable",
+            "superFunction": 258,
+            "visibility": "public"
+          }
+        ],
+        "scope": 173,
+        "src": "79:208:2"
+      }
+    ],
+    "src": "1:287:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.10",
+  "updatedAt": "2019-08-24T16:08:21.588Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
