@@ -7,7 +7,13 @@ const disputeManagerContract = require('../../build/contracts/DisputeManager.jso
 const impactInvestmentContract = require('../../build/contracts/ImpactInvestment.json');
 const fundingContract = require('../../build/contracts/OpenFunding.json');
 
-var provider, signer, walletAddress, registry;
+const AUTHOR = '0x0432043bE8CAbbA7df8759d6E9cE8Aa5Fcc4B009';
+
+const REGISTRY_ADDRESS= '0x4e0D6436f82c9D7B17c4f62d30c615Dd7756471D';
+const FUNDING_ADDRESS = '0x2f106A81d1fD5BED5bBF8b03C425E013CD277323';
+const CONTRACT_ADDRESS = '0xc215b616A33E011e2481Cc199b5a1e761EDA99B0';
+
+var provider, signer, impactContract, registry, fundingClause;
 
 const injectedWeb3 = window.web3;
 if (typeof injectedWeb3 !== "undefined") {
@@ -24,6 +30,42 @@ export const contracts = {
     registry = await registryFactory.deploy();
     console.log('Clauses registry deployed: ' + registry.address)
   },
+  deployFundingClause: async function() {
+    let fundingFactory = new ethers.ContractFactory(fundingContract.abi, fundingContract.bytecode, signer);
+    fundingClause = await fundingFactory.deploy();
+    await registry.registerClause(fundingClause.address, AUTHOR, 100, 25);
+    console.log('Funding clause deployed: ' + fundingClause.address);
+  },
+  init: function() {
+    registry = new ethers.Contract(REGISTRY_ADDRESS, registryContract.abi, signer);
+    fundingClause = new ethers.Contract(FUNDING_ADDRESS, fundingContract.abi, signer);
+    impactContract = new ethers.Contract(CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
+
+    console.log('Clauses registry linked: ' + registry.address);
+    console.log('Funding clause linked: ' + fundingClause.address);
+    console.log('Impact contract linked: ' + impactContract.address);
+  },
+  deployLegalContract: async function() {
+    let impactContractFactory = new ethers.ContractFactory(impactInvestmentContract.abi, impactInvestmentContract.bytecode, signer);
+    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ['MAX_DONATION'], [20]);
+
+    console.log('Impact contract deployed: ' + impactContract.address);
+  },
+  fund: async function(amount) {
+    let before = state.contract.successes;
+    await impactContract.fund(amount, {value: 125});
+    await this.fetchState();
+    return (state.contract.successes > before);
+  },
+  fetchState: async function() {
+    state.contract.funded = await impactContract.funded();
+    let result = await registry.getStats(fundingClause.address);
+    state.contract.failures = result.failure;
+    state.contract.successes = result.success;
+    console.log("Funded: " + state.contract.funded);
+    console.log("Failures: " + state.contract.failures);
+    console.log("Succeses: " + state.contract.successes);
+  }
 
   // deployCatalog: async function() {
   //   let factory = new ethers.ContractFactory(catalogContract.abi, catalogContract.bytecode, signer);
@@ -140,4 +182,5 @@ export const contracts = {
   // }
 
 };
+contracts.init();
 

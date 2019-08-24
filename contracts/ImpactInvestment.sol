@@ -1,5 +1,6 @@
 
 pragma solidity ^0.5.2;
+pragma experimental ABIEncoderV2;
 
 import './BaseClause.sol';
 import './LegalContract.sol';
@@ -13,7 +14,12 @@ contract ImpactInvestment is LegalContract {
     BaseClause public validationClause;
     BaseClause public redemptionClause;
 
-    constructor(ClauseRegistry _registry) LegalContract(_registry) public { }
+    constructor(ClauseRegistry _registry, BaseClause _fundingClause, string[] memory valNames, uint256[] memory values) LegalContract(_registry) public {
+        fundingClause = _fundingClause;
+        for (uint i=0; i<valNames.length; i++) {
+            setValue(valNames[i], values[i]);
+        }
+    }
 
     function setFundingClause(BaseClause clause) public {
         fundingClause = clause;

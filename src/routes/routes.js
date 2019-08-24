@@ -1,6 +1,6 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-import Dashboard from "@/pages/Dashboard.vue";
+import State from "@/pages/State.vue";
 import Conditions from "@/pages/ConditionsDashboard/Conditions.vue";
 import Interface from "@/pages/Interface.vue";
 // import Popsicle from "@/pages/Popsicle.vue";
@@ -10,12 +10,12 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/dashboard",
+    redirect: "/popsicle",
     children: [
       {
-        path: "dashboard",
-        name: "Dashboard",
-        component: Dashboard
+        path: "state",
+        name: "State",
+        component: State
       },
       {
         path: "popsicle",
