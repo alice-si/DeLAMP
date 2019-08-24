@@ -29,6 +29,7 @@ contract LegalContract {
     }
 
     function appeal(uint256 _index) public {
+        require(msg.sender = getRole('ARBITER'));
         address target;
         bytes memory data;
         bool appealed;

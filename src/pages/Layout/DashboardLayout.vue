@@ -9,19 +9,19 @@
         <md-icon>build</md-icon>
         <p>Contract Builder</p>
       </sidebar-link>
-      <sidebar-link to="/state">
-        <md-icon>visibility</md-icon>
-        <p>Contract State</p>
-      </sidebar-link>
       <sidebar-link to="/interface">
         <md-icon>unarchive</md-icon>
         <p>Contract Interface</p>
       </sidebar-link>
-      <sidebar-link to="/conditions">
+      <sidebar-link to="/state">
+        <md-icon>visibility</md-icon>
+        <p>Contract State</p>
+      </sidebar-link>
+      <sidebar-link to="/updates">
         <md-icon>build</md-icon>
         <p>Updates</p>
       </sidebar-link>
-      <sidebar-link to="/conditions">
+      <sidebar-link to="/exceptions">
         <md-icon>error</md-icon>
         <p>Exceptions</p>
       </sidebar-link>
