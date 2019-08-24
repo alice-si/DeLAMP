@@ -2,24 +2,25 @@
   <div class="md-layout">
     <div class="md-layout-item md-size-50 editor-section">
       <h3>Clauses</h3>
-
-      <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
-        <h4 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" class="md-list-item-text clause-type-header" v-on:click="toggle(typeOfClause)">
-          <span>{{ typeOfClause }}
-          <i v-if="!expanded[typeOfClause]" class="material-icons arrow-expand">expand_more</i>
-          <i v-if="expanded[typeOfClause]" class="material-icons arrow-expand">expand_less</i>
-          </span>
-        </h4>
-        <ClausesSmall :clauses="clauses"
-                      :expanded="expanded[typeOfClause]"
-                      :color="clauseColours[typeOfClause]"
-                      :icon="clauseIcons[typeOfClause]"/>
+      <div class="editor-container">
+        <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
+          <h4 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" class="md-list-item-text clause-type-header" v-on:click="toggle(typeOfClause)">
+            <span>{{ typeOfClause }}
+            <i v-if="!expanded[typeOfClause]" class="material-icons arrow-expand">expand_more</i>
+            <i v-if="expanded[typeOfClause]" class="material-icons arrow-expand">expand_less</i>
+            </span>
+          </h4>
+          <ClausesSmall :clauses="clauses"
+                        :expanded="expanded[typeOfClause]"
+                        :color="clauseColours[typeOfClause]"
+                        :icon="clauseIcons[typeOfClause]"/>
+        </div>
       </div>
-
+  
     </div>
     <div class="md-layout-item md-size-50 editor-section">
       <h3>Contract Structure</h3>
-      <div style="overflow-y: scroll; max-height: 92vh;">
+      <div class="editor-container">
         <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
           <h4>{{ typeOfClause }}</h4>
           <ClausesLarge :color="clauseColours[typeOfClause]"/>
@@ -131,6 +132,11 @@ input {
 
 .drag-area {
   width: 50%;
+}
+
+.editor-container {
+  overflow-y: scroll;
+  max-height: 92vh;
 }
 
 .editor-section {
