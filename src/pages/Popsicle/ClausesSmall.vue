@@ -11,6 +11,9 @@
                       v-for="clause in clauses"
                       :key="clause.id">
                       {{ clause.title }}
+                      <div class="popularity">
+                        {{ clause.popularity }} contracts
+                      </div>
                  </div>
                </transition-group>
     </draggable>
@@ -87,7 +90,13 @@ input {
 }
 .clause {
   margin: 5px 0 !important;
-  padding: 10px;
+  padding: 20px;
   width: 100%;
+}
+.popularity {
+  font-size: 8px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 </style>
