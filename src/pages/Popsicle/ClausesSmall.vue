@@ -10,9 +10,23 @@
                       v-bind:style="{ 'background-color': color[1] + '!important' }"
                       v-for="clause in clauses"
                       :key="clause.id">
-                      {{ clause.title }}
-                      <div class="popularity">
-                        {{ clause.popularity }} contracts
+                      <div class="clause-title">
+                        <h6>{{ clause.title }}</h6>
+                      </div>
+
+                      <hr>
+                      
+                      <div class="tracking-info">
+                        <table>
+                          <tr v-for="[title, key] in  trackingFields">
+                            <td class="tracking-title">
+                              {{ title }}
+                            </td>
+                            <td>
+                              {{ makeShorter(clause.tracking[key]) }}
+                            </td>
+                          </tr>
+                        </table>
                       </div>
                  </div>
                </transition-group>
@@ -38,6 +52,16 @@ export default {
   data: function() {
     return {
       selectedClauses: [],
+      trackingFields: [
+        ['Author', 'author'],
+        ['Auditor', 'auditor'],
+        ['Author fee', 'authorFee'],
+        ['Auditor fee', 'auditorFee'],
+        ['Registry fee', 'registryFee'],
+        ['Success count', 'successCount'],
+        ['Failure count', 'failureCount'],
+        
+      ]
     }
   },
   components: {
@@ -50,6 +74,12 @@ export default {
     },
     log: function(evt) {
       window.console.log(evt);
+    },
+    makeShorter(value) {
+      if (value && value.length > 20) {
+        return value.substring(0, 7) + '...' + value.substring(value.length - 7);
+      }
+      return value;
     }
   },
   beforeMount() {
@@ -93,10 +123,21 @@ input {
   padding: 20px;
   width: 100%;
 }
-.popularity {
+
+h6 {
+  font-weight: 1000;
+}
+
+
+
+.tracking-info {
   font-size: 8px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
+  /* position: absolute; */
+  /* right: 5px; */
+  /* top: 5px; */
+}
+
+.tracking-title {
+  /* font-weight: 1000; */
 }
 </style>
