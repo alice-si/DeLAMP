@@ -21,6 +21,7 @@
                 </template>
             </stats-card>
         </div>
+        <!--
         <div
                 class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
         >
@@ -87,6 +88,7 @@
                 </template>
             </stats-card>
         </div>
+        -->
     </div>
 </template>
 

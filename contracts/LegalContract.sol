@@ -3,6 +3,7 @@ pragma solidity ^0.5.2;
 
 import './ClauseRegistry.sol';
 import './DisputeManager.sol';
+import './UpdateManager.sol';
 
 contract LegalContract {
 
@@ -11,10 +12,12 @@ contract LegalContract {
 
     ClauseRegistry public clauseRegistry;
     DisputeManager public disputeManager;
+    UpdateManager public updateManager;
 
     constructor(ClauseRegistry _registry) public {
         clauseRegistry = _registry;
         disputeManager = new DisputeManager();
+        updateManager = new UpdateManager();
     }
 
     function execute(address target, bytes memory data) internal {
@@ -29,6 +32,7 @@ contract LegalContract {
     }
 
     function appeal(uint256 _index) public {
+        require(msg.sender == getRole('ARBITER'));
         address target;
         bytes memory data;
         bool appealed;
@@ -42,6 +46,25 @@ contract LegalContract {
             if (success) {
                 disputeManager.resolveDispute(_index);
             }
+        }
+    }
+
+    function addProposal(string memory symbol, uint256 value) public {
+        updateManager.addProposal(symbol, value);
+    }
+
+    function update(uint256 _index) public {
+        require(msg.sender == getRole('ARBITER'));
+
+        string memory symbol;
+        uint256 value;
+        bool updated;
+
+        (symbol, value, updated) = updateManager.getProposal(_index);
+
+        if (!updated) {
+            setValue(symbol, value);
+            updateManager.updateProposal(_index);
         }
     }
 

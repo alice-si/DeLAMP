@@ -144,4 +144,8 @@ input {
 .arg-field {
   margin-top: 10px;
 }
+
+.marquee-text-text {
+  color: white;
+}
 </style>

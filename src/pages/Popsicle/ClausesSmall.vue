@@ -5,10 +5,6 @@
                :group="{ name: 'clauses', pull: 'clone', put: false }"
                @change="log">
                <transition-group>
-                 <!-- <div class="list-group-item md-button clause"
-                      v-bind:style="{ 'background-color': color[1] + '!important' }"
-                      v-for="clause in clauses"
-                      :key="clause.id"> -->
                       <stats-card v-for="clause in clauses"
                                   :key="clause.id"
                                   :header-color="color[1]">

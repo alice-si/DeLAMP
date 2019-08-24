@@ -2,9 +2,18 @@
   <div class="md-layout">
     <div class="md-layout-item md-size-50 editor-section">
       <h3>Clauses</h3>
+
       <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
-        <h4>{{ typeOfClause }}</h4>
-        <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]" :icon="clauseIcons[typeOfClause]"/>
+        <h4 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" class="md-list-item-text clause-type-header" v-on:click="toggle(typeOfClause)">
+          <span>{{ typeOfClause }}
+          <i v-if="!expanded[typeOfClause]" class="material-icons arrow-expand">expand_more</i>
+          <i v-if="expanded[typeOfClause]" class="material-icons arrow-expand">expand_less</i>
+          </span>
+        </h4>
+        <ClausesSmall :clauses="clauses"
+                      :expanded="expanded[typeOfClause]"
+                      :color="clauseColours[typeOfClause]"
+                      :icon="clauseIcons[typeOfClause]"/>
       </div>
 
     </div>
@@ -43,6 +52,10 @@ import ClausesLarge from "./ClausesLarge";
         ],
         clauseColours: [],
         clauseIcons: null,
+        expanded: {
+          "Funding": true,
+          "Investment": false
+        },
       };
     },
     computed: {
@@ -73,6 +86,14 @@ import ClausesLarge from "./ClausesLarge";
       },
       log: function(e) {
         console.log(e);
+      },
+      toggle(typeOfClause) {
+        let newVal = !Boolean(this.expanded[typeOfClause]);
+        for (let type in this.expanded) {
+          this.expanded[type] = false;
+        }
+        this.expanded[typeOfClause] = newVal;
+        // Vue.set(this.expanded, typeOfClause, newVal);
       }
     },
     beforeMount() {
@@ -121,5 +142,13 @@ input {
   padding: 10px;
   width: 100%;
   background-color: red;
+}
+
+.arrow-expand {
+  margin-bottom: -10px;
+}
+
+.clause-type-header {
+  cursor: pointer;
 }
 </style>

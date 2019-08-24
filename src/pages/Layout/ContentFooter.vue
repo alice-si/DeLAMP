@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="container">
+    <!-- <div class="container">
       <nav>
         <ul>
           <li>
@@ -14,9 +14,9 @@
         &copy; {{ new Date().getFullYear() }}
         <a href="https://alice.si" target="_blank"
           >Alice</a
-        >, proudly funded by the <a href="https://gnosis.io/">Gnosis</a> GECO grant
+        >
       </div>
-    </div>
+    </div> -->
   </footer>
 </template>
 <script>

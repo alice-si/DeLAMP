@@ -1,7 +1,8 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import State from "@/pages/State.vue";
-import Conditions from "@/pages/ConditionsDashboard/Conditions.vue";
+import Updates from "@/pages/Updates.vue";
+import Exceptions from "@/pages/Exceptions.vue";
 import Interface from "@/pages/Interface.vue";
 // import Popsicle from "@/pages/Popsicle.vue";
 import PopsiclePage from "@/pages/Popsicle/PopsiclePage";
@@ -28,9 +29,14 @@ const routes = [
         component: Interface
       },
       {
-        path: "conditions",
-        name: "Conditions",
-        component: Conditions
+        path: "updates",
+        name: "Updates",
+        component: Updates
+      },
+      {
+        path: "exceptions",
+        name: "Exceptions",
+        component: Exceptions
       },
 
 
