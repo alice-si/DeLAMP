@@ -1,14 +1,14 @@
 <template>
   <div>
-    <!-- <h3>{{ type }} !-->
-    <p class="clause-text" v-html="getContentHtml">
+    <h4 style="font-weight: 600;">&#167; {{ type }}</h4>
+    <p class="clause-text" v-html="getContentHtml" style="margin-top: -5px;">
       <!-- {{ text || 'Empty' }} -->
       <!-- <VueTyper v-if="text" :typeDelay="0" :pre-type-delay="1" :text="text" :repeat="0" caret-animation='blink'  /> -->
       <!-- {{ JSON.stringify(template) }}
       {{ JSON.stringify(passedArguments) }} -->
     </p>
   </div>
-  
+
 </template>
 
 <script>
@@ -78,6 +78,7 @@ export default {
     transition-duration: 1s;
     transition-timing-function: ease-out;
     transition-delay: 0s; */
+    margin-top: 0;
 }
 
 </style>

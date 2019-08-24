@@ -14,6 +14,7 @@ import state from './state';
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
+import VueSignature from 'vue-signature-pad';
 
 // MaterialDashboard plugin
 import MaterialDashboard from "./material-dashboard";
@@ -33,6 +34,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+Vue.use(VueSignature);
 
 /* eslint-disable no-new */
 new Vue({

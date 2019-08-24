@@ -1,6 +1,7 @@
 <template>
   <md-card class="md-card-stats">
-    <md-card-header :data-background-color="dataBackgroundColor">
+    <md-card-header :data-background-color="dataBackgroundColor"
+                    v-bind:style="{ 'background-color': headerColor + '!important' }">
       <slot name="header"></slot>
     </md-card-header>
 
@@ -20,6 +21,10 @@ export default {
     dataBackgroundColor: {
       type: String,
       default: ""
+    },
+    headerColor: {
+      type: String,
+      default: "",
     }
   }
 };

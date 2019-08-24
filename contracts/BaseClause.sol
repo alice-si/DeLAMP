@@ -3,6 +3,7 @@ pragma solidity ^0.5.2;
 
 import './ClauseRegistry.sol';
 import './DisputeManager.sol';
+import './UpdateManager.sol';
 
 contract BaseClause {
 
@@ -11,5 +12,6 @@ contract BaseClause {
 
     ClauseRegistry clauseRegistry;
     DisputeManager disputeManager;
+    UpdateManager public updateManager;
 
 }

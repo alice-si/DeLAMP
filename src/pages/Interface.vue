@@ -5,8 +5,6 @@
                 <nav-tabs-card>
                     <template slot="content">
 
-                        <md-button class="md-round md-success" @click="test()">Deploy</md-button>
-
                         <md-tabs class="md-success" md-alignment="left">
 
                             <md-tab md-label="Funding" md-icon="cloud_upload">
@@ -56,7 +54,9 @@
                                         <h6 class="category text-gray">Hedge against the risk</h6>
                                         <h4 class="card-title">Select a new condition</h4>
 
-                                        <md-button class="md-round md-success" @click="test()">Deploy</md-button>
+                                        <md-button class="md-round md-success" @click="deployRegistry()">Deploy registry</md-button>
+                                        <md-button class="md-round md-success" @click="deployClause()">Deploy clause</md-button>
+                                        <md-button class="md-round md-success" @click="deployContract()">Deploy contract</md-button>
                                     </md-card-content>
                                 </md-card>
                             </md-tab>
@@ -85,11 +85,15 @@
       NavTabsTable
     },
     methods: {
-      test: async function() {
-        //await contracts.deployClausesRegistry();
-        //await contracts.deployFundingClause();
+      deployContract: async function() {
         console.log("DEPLOYING legal contract");
         await contracts.deployLegalContract();
+      },
+      deployRegistry: async function() {
+        await contracts.deployClausesRegistry();
+      },
+      deployClause: async function() {
+        await contracts.deployFundingClause();
       },
       donate: async function() {
         console.log("Donating: " + this.form.value);

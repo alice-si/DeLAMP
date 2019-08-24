@@ -23,6 +23,7 @@
     "vue-marquee-text-component": "^1.1.1",
     "vue-material": "1.0.0-beta-11",
     "vue-router": "3.0.6",
+    "vue-signature-pad": "^1.1.14",
     "vue-social-sharing": "2.4.5",
     "vue-typer": "^1.2.0",
     "vuedraggable": "^2.23.0",

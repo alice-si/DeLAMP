@@ -13,8 +13,8 @@
                   <md-list style="background: transparent !important;">
                     <md-list-item md-expand>
                     <marquee-text :duration="6"
-                                  v-if="clause.title.length > 11">
-                      <h4>{{ clause.title }} </h4>
+                                  v-if="clause.title.length > 15">
+                      <h4 style="color: #fff;">{{ clause.title }} </h4>
                     </marquee-text>
                     <h4 v-else style="color: #fff;">{{clause.title}}</h4>
 
@@ -49,10 +49,6 @@ export default {
       required: true,
       type: Array,
     },
-    clauseType: {
-      required: true,
-      type: String,
-    }
   },
   data: function() {
     return {

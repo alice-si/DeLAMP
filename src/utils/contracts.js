@@ -1,9 +1,11 @@
 import {state} from "../state.js";
+import clausesConfig from "../clausesConfig.js";
 import Vue from 'vue';
 
 const ethers = require('ethers');
 const registryContract = require('../../build/contracts/ClauseRegistry.json');
 const disputeManagerContract = require('../../build/contracts/DisputeManager.json');
+const updateManagerContract = require('../../build/contracts/UpdateManager.json');
 const impactInvestmentContract = require('../../build/contracts/ImpactInvestment.json');
 const fundingContract = require('../../build/contracts/OpenFunding.json');
 
@@ -12,9 +14,9 @@ const AUTHOR = '0x0432043bE8CAbbA7df8759d6E9cE8Aa5Fcc4B009';
 //TODO: Replace with own ganache address
 const ARBITER = '0xCa9267EC6C6a127606A047c2cf2D152E6fE387A1';
 
-const REGISTRY_ADDRESS= '0x4e0D6436f82c9D7B17c4f62d30c615Dd7756471D';
-const FUNDING_ADDRESS = '0x2f106A81d1fD5BED5bBF8b03C425E013CD277323';
-const CONTRACT_ADDRESS = '0xb0899fedB841476A928d76b6B78635687B376f2A';
+const REGISTRY_ADDRESS= '0x8c393366bc5b89ccb66c2e35d4607c4277f9e49a';
+const FUNDING_ADDRESS = '0x272e4912e8dcb8c46fd204dab7e27ba83a27afd2';
+const CONTRACT_ADDRESS = '0x30f0705f6f532545d59420023a147856fdc0953c';
 
 var provider, signer, impactContract, registry, fundingClause, disputeManager;
 
@@ -42,16 +44,21 @@ export const contracts = {
   init: function() {
     registry = new ethers.Contract(REGISTRY_ADDRESS, registryContract.abi, signer);
     fundingClause = new ethers.Contract(FUNDING_ADDRESS, fundingContract.abi, signer);
-    impactContract = new ethers.Contract(CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
+    impactContract = new ethers.Contract(localStorage.contractAddress || CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
 
     console.log('Clauses registry linked: ' + registry.address);
     console.log('Funding clause linked: ' + fundingClause.address);
     console.log('Impact contract linked: ' + impactContract.address);
   },
-  deployLegalContract: async function() {
+  deployLegalContract: async function(args) {
+    let min = args.min_donation;
+    let max = args.max_donation;
+    console.log('Min: ' + min + " max: " + max);
     let impactContractFactory = new ethers.ContractFactory(impactInvestmentContract.abi, impactInvestmentContract.bytecode, signer);
-    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ARBITER, ['MAX_DONATION'], [20]);
+    impactContract = await impactContractFactory.deploy(registry.address, fundingClause.address, ARBITER, ['MIN_DONATION', 'MAX_DONATION'], [min, max]);
 
+    localStorage.contractAddress = impactContract.address;
+    await contracts.fetchState();
     console.log('Impact contract deployed: ' + impactContract.address);
   },
   fund: async function(amount) {
@@ -74,6 +81,11 @@ export const contracts = {
     console.log("Succeses: " + state.contract.successes);
     console.log("MIN: " + state.contract.min);
     console.log("MAX: " + state.contract.max);
+
+    // TODO: We must make it general for all clauses.
+    //       For hackathon we only set these values to the first clause.
+    clausesConfig.clauses.Funding[0].tracking.failureCount = state.contract.failures;
+    clausesConfig.clauses.Funding[0].tracking.successCount = state.contract.successes;
   },
   fetchExceptions: async function() {
     let dmAddress = await impactContract.disputeManager();
@@ -104,6 +116,40 @@ export const contracts = {
     await impactContract.appeal(index);
 
     await this.fetchExceptions();
+    await this.fetchState();
+  },
+  addProposal: async function(parameter, value) {
+    console.log("Adding proposal: " + parameter + " with value: " + value);
+    await impactContract.addProposal(parameter, value);
+    await this.fetchUpdates();
+  },
+  fetchUpdates: async function() {
+    console.log("Fetching updates");
+    state.updates.length = 0;
+
+    let umAddress = await impactContract.updateManager();
+    let updateManager = new ethers.Contract(umAddress, updateManagerContract.abi, signer);
+
+    let arbiter = await impactContract.getRole('ARBITER');
+    let currentAccount = await signer.getAddress();
+
+    let count = (await updateManager.getProposalsCount()).valueOf();
+    for(var i=0; i<count; i++) {
+      let proposal = await updateManager.getProposal(i);
+      state.updates.push({
+        id: i,
+        symbol: proposal[0],
+        value: proposal[1],
+        updated: proposal[2],
+        canUpdate: arbiter === currentAccount
+      })
+    }
+  },
+  update: async function(id) {
+    console.log("Updating proposal: " + id);
+
+    await impactContract.update(id);
+    await this.fetchUpdates();
     await this.fetchState();
   }
 
@@ -224,4 +270,3 @@ export const contracts = {
 };
 contracts.init();
 contracts.fetchState();
-
