@@ -14,6 +14,7 @@
     "ethers": "^4.0.33",
     "gnosis-hg-js": "git+https://github.com/alice-si/gnosis-hg-js.git",
     "google-maps": "3.3.0",
+    "jspdf": "^1.5.3",
     "mustache": "^3.0.2",
     "vue": "2.6.10",
     "vue-clickaway": "2.2.2",

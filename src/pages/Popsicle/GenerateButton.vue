@@ -1,9 +1,18 @@
 <template>
   <div>
-    <button id="generate-button">Generate button will be here</button>
+    <button disabled="disabled" v-if="!canBeDeployed">
+      Can't be deployed yet
+    </button>
+
+    <button v-if="canBeDeployed" id="generate-button">
+      Deploy and print
+    </button>
   </div>
 </template>
 <script>
+
+import {state} from '@/state';
+import clausesConfig from '@/clausesConfig';
 
 export default {
   name: "generate-button",
@@ -11,7 +20,13 @@ export default {
   },
   data() {
     return {
+      state,
     };
+  },
+  computed: {
+    canBeDeployed() {
+      this.state.selected.length == clausesConfig.types.length;
+    }
   },
   methods: {
   }
@@ -20,7 +35,13 @@ export default {
 
 <style scoped>
 #generate-button {
-  padding: 20px;
   background-color: lightgreen;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: large;
 }
 </style>

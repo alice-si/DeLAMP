@@ -1,5 +1,7 @@
 <template>
-  <div >
+  <div>
+    <button v-on:click="print">Print</button>
+
     <div id="preview-content">
       <h3>Legal contract</h3>
       <LegalClausePreview
@@ -19,6 +21,7 @@ import clausesConfig from '@/clausesConfig';
 import LegalClausePreview from './LegalClausePreview';
 import { setInterval } from 'timers';
 import Mustache from 'mustache';
+import printContract from '@/utils/printContract';
 
 const INTERVAL_MS = 1000;
 const HIGHLIGHTING_MS = 1000;
@@ -79,6 +82,11 @@ export default {
   },
   components: {
     LegalClausePreview
+  },
+  methods: {
+    print() {
+      printContract.print();
+    }
   },
   data() {
     let rendered = {};
