@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!-- <button disabled="disabled" v-show="!canBeDeployed">
-      Can't be deployed yet
-    </button> -->
-
-    <!-- <button v-if="canBeDeployed" id="generate-button">
-      Deploy and print
-    </button> -->
 
     <md-button
       v-if="canBeDeployed"

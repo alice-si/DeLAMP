@@ -5,16 +5,17 @@
     :data-image="backgroundImage"
     :style="sidebarStyle"
   >
-    <div class="logo">
+    <div class="logo" style="padding-top: 0">
       <!--<a href="#" class="simple-text logo-mini">-->
         <!--<div class="logo-img">-->
          <!---->
         <!--</div>-->
       <!--</a>-->
       <div>
-        <img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png" style="height:30px;" />
+        <!-- <img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png" style="height:30px;" /> -->
+        <div style="width: 100%; height: 150px; background: radial-gradient(rgba(80, 80, 80, 0.01),  rgba(82, 82, 82, 1)), url('https://alex-s3-hatskier.s3.eu-west-2.amazonaws.com/deLamp.gif') center center" />
       </div>
-      <div class="head-title"> LAMP </div>
+      <div class="head-title"> deLAMP </div>
 
     </div>
     <div class="sidebar-wrapper">

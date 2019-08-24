@@ -1,6 +1,5 @@
 <template lang="html">
   <div>
-    {{clauseType}}
     <draggable class="dragArea list-group"
                v-bind:style="{ 'background-color': color[0] }"
                :list="selectedClauses"
@@ -148,5 +147,9 @@ input {
 
 .arg-field {
   margin-top: 10px;
+}
+
+.marquee-text-text {
+  color: white;
 }
 </style>

@@ -4,10 +4,13 @@
       <h3>Clauses</h3>
 
       <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
-        <h4 class="md-list-item-text">
-              {{ typeOfClause }}
+        <h4 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" class="md-list-item-text clause-type-header" v-on:click="toggle(typeOfClause)">
+          <span>{{ typeOfClause }}
+          <i v-if="!expanded[typeOfClause]" class="material-icons arrow-expand">expand_more</i>
+          <i v-if="expanded[typeOfClause]" class="material-icons arrow-expand">expand_less</i>
+          </span>
         </h4>
-        <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]"/>
+        <ClausesSmall :clauses="clauses" :expanded="expanded[typeOfClause]" :color="clauseColours[typeOfClause]"/>
       </div>
 
     </div>
@@ -16,7 +19,7 @@
       <div style="overflow-y: scroll; max-height: 92vh;">
         <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
           <h4>{{ typeOfClause }}</h4>
-          <ClausesLarge :color="clauseColours[typeOfClause]" :clauseType="clauses.title"/>
+          <ClausesLarge :color="clauseColours[typeOfClause]" :clauseType="typeOfClause"/>
         </div>
       </div>
     </div>
@@ -45,6 +48,10 @@ import ClausesLarge from "./ClausesLarge";
           { name: "Johnson", id: 7 },
         ],
         clauseColours: [],
+        expanded: {
+          "Funding": true,
+          "Investment": false
+        },
       };
     },
     computed: {
@@ -73,6 +80,14 @@ import ClausesLarge from "./ClausesLarge";
       },
       log: function(e) {
         console.log(e);
+      },
+      toggle(typeOfClause) {
+        let newVal = !Boolean(this.expanded[typeOfClause]);
+        for (let type in this.expanded) {
+          this.expanded[type] = false;
+        }
+        this.expanded[typeOfClause] = newVal;
+        // Vue.set(this.expanded, typeOfClause, newVal);
       }
     },
     beforeMount() {
@@ -121,5 +136,13 @@ input {
   padding: 10px;
   width: 100%;
   background-color: red;
+}
+
+.arrow-expand {
+  margin-bottom: -10px;
+}
+
+.clause-type-header {
+  cursor: pointer;
 }
 </style>

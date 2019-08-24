@@ -1,6 +1,5 @@
 <template lang="html">
-  <div>
-    <!-- <md-list-item class="md-inset"> -->
+  <div v-if="expanded">
     <draggable class="dragArea list-group" 
                v-bind:style="{ 'background-color': color[0] }"
                :list="clauses"
@@ -50,7 +49,8 @@ export default {
     color: {
       required: true,
       type: Array,
-    }
+    },
+    expanded: Boolean,
   },
   data: function() {
     return {
