@@ -29,6 +29,9 @@
                         :key="element.name">
                         {{ element.name }}
                   </div>
+                  <div>
+                    askjdjd
+                  </div>
         </draggable>
       </div>
       <!-- <rawDisplayer class="md-size-50" :value="list1" title="List 1" />
@@ -123,6 +126,7 @@ input {
   margin: 5px 0 !important;
   padding: 10px;
   width: 100%;
+  background-color: red;
 
 }
 </style>
