@@ -1,11 +1,11 @@
 <template>
   <div class="md-layout md-size-100"
        id="popsiclePage">
-    <div class="md-layout-item md-size-50">
+    <div class="md-layout-item md-size-66">
       <Editor id="editor" />
     </div>
 
-    <div class="md-layout-item md-size-50">
+    <div class="md-layout-item md-size-33">
       <Preview id="preview" />
     </div>
 

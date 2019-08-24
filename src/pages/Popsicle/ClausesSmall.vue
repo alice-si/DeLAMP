@@ -1,34 +1,51 @@
 <template lang="html">
   <div>
     <draggable class="dragArea list-group"
-               v-bind:style="{ 'background-color': color[0] }"
                :list="clauses"
                :group="{ name: 'clauses', pull: 'clone', put: false }"
                @change="log">
                <transition-group>
-                 <div class="list-group-item md-button clause"
+                 <!-- <div class="list-group-item md-button clause"
                       v-bind:style="{ 'background-color': color[1] + '!important' }"
                       v-for="clause in clauses"
-                      :key="clause.id">
-                      <div class="clause-title">
-                        <h6>{{ clause.title }}</h6>
-                      </div>
+                      :key="clause.id"> -->
+                      <stats-card v-for="clause in clauses"
+                                  :key="clause.id"
+                                  :header-color="color[1]">
+                        <template slot="header">
+                          <md-icon>{{icon}}</md-icon>
+                        </template>
 
-                      <hr>
-                      
-                      <div class="tracking-info">
-                        <table>
-                          <tr v-for="[title, key] in  trackingFields">
-                            <td class="tracking-title">
-                              {{ title }}
-                            </td>
-                            <td>
-                              {{ makeShorter(clause.tracking[key]) }}
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                 </div>
+                        <template slot="content">
+                          <p class="category">Executions</p>
+                          <h3 class="title"><span style="color: #5cb85c">{{clause.tracking['successCount']}}</span> |
+                                            <span style="color: #d9534f">{{ clause.tracking['failureCount'] }}</span>
+                                          </h3>
+                        </template>
+
+                        <template slot="footer">
+                          <div class="stats">
+                            <div class="stats-row" style="font-size: 14px; text-transform: capitalize; font-weight: 600;">
+                              {{ clause.title }}
+                            </div>
+                            <div class="stats-row">
+                              <md-icon>attach_money</md-icon>
+                              Price: ${{ clause.tracking['price'] }}
+                            </div>
+
+                            <div class="stats-row">
+                              <md-icon>create</md-icon>
+                              Author: {{ makeShorter(clause.tracking['author']) }}
+                            </div>
+
+                            <div class="stats-row">
+                              <md-icon>how_to_reg</md-icon>
+                              Auditor: {{ makeShorter(clause.tracking['auditor']) }}
+                            </div>
+                          </div>
+                        </template>
+                      </stats-card>
+
                </transition-group>
     </draggable>
   </div>
@@ -37,6 +54,8 @@
 import draggable from "vuedraggable";
 import ClausesConfig from "@/clausesConfig";
 import state from "@/state";
+import { StatsCard } from "@/components";
+import MarqueeText from 'vue-marquee-text-component';
 
 export default {
   props: {
@@ -47,30 +66,37 @@ export default {
     color: {
       required: true,
       type: Array,
+    },
+    icon: {
+      required: true,
+      type: String,
     }
   },
   data: function() {
     return {
       selectedClauses: [],
+      clauseIcons: null,
       trackingFields: [
         ['Author', 'author'],
         ['Auditor', 'auditor'],
         ['Author fee', 'authorFee'],
         ['Auditor fee', 'auditorFee'],
         ['Registry fee', 'registryFee'],
+        ['Price', 'price'],
         ['Success count', 'successCount'],
         ['Failure count', 'failureCount'],
-        
+
       ]
     }
   },
   components: {
-    draggable
+    draggable,
+    StatsCard,
+    MarqueeText,
   },
   methods: {
     fetchClauses() {
       this.clauseKeys = ClausesConfig.types;
-      console.log(this.clauseKeys);
     },
     log: function(evt) {
       window.console.log(evt);
@@ -137,7 +163,7 @@ h6 {
   /* top: 5px; */
 }
 
-.tracking-title {
-  /* font-weight: 1000; */
+.stats-row {
+  width: 100%;
 }
 </style>

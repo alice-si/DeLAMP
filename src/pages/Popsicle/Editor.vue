@@ -4,7 +4,7 @@
       <h3>Clauses</h3>
       <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
         <h4>{{ typeOfClause }}</h4>
-        <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]"/>
+        <ClausesSmall :clauses="clauses" :color="clauseColours[typeOfClause]" :icon="clauseIcons[typeOfClause]"/>
       </div>
 
     </div>
@@ -13,7 +13,7 @@
       <div style="overflow-y: scroll; max-height: 92vh;">
         <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
           <h4>{{ typeOfClause }}</h4>
-          <ClausesLarge :color="clauseColours[typeOfClause]" :clauseType="clauses.title"/>
+          <ClausesLarge :color="clauseColours[typeOfClause]"/>
         </div>
       </div>
     </div>
@@ -42,6 +42,7 @@ import ClausesLarge from "./ClausesLarge";
           { name: "Johnson", id: 7 },
         ],
         clauseColours: [],
+        clauseIcons: null,
       };
     },
     computed: {
@@ -60,6 +61,8 @@ import ClausesLarge from "./ClausesLarge";
       fetchClauses: function() {
         this.clauseGroups = Clauses.clauses;
         this.clauseColours = Clauses.colours;
+        this.clauseIcons = Clauses.icons;
+        console.log(this.clauseIcons);
       },
       printClauses: function() {
         console.log(this.list);

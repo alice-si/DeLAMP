@@ -3,7 +3,7 @@ let conf = {
     'Funding': [
       {
         id: 'donation',
-        title: 'donation',
+        title: 'Open Donation',
         legalContent: `This deed is dated {{ max }} and entered into by
 {{ max }} incorporated and registered in [England and Wales] with company number [NUMBER] whose registered office is at {{ max }} (Issuer)
 BACKGROUND
@@ -19,16 +19,17 @@ BACKGROUND
           authorFee: 1,
           auditorFee: 100,
           registryFee: 12,
+          price: 100,
           successCount: 123,
           failureCount: 12
         }
       },
       {
-        id: 'comission',
-        title: 'comission',
+        id: 'SingleCommissioner',
+        title: 'Single Commissioner',
         legalContent: `
 Certificates
-Each certificate for Notes shall: 
+Each certificate for Notes shall:
 bear a denoting number;
 be issued to a Noteholder in digital token form pursuant to the smart contract at address [Ethereum address] and containing the information set out in ‎Schedule 1 and shall be executed by the Issuer in accordance with the UK Companies Act 2006; and
 have the Conditions endorsed on or attached to it.
@@ -46,6 +47,7 @@ When a Noteholder transfers or redeems part only of their Notes, the old certifi
           authorFee: 1,
           auditorFee: 100,
           registryFee: 12,
+          price: 1000,
           successCount: 123,
           failureCount: 12
         }
@@ -79,6 +81,7 @@ Any Noteholder may at all reasonable times during office hours and on reasonable
           authorFee: 1,
           auditorFee: 100,
           registryFee: 12,
+          price: 5000,
           successCount: 123,
           failureCount: 12
         }
@@ -89,6 +92,12 @@ Any Noteholder may at all reasonable times during office hours and on reasonable
     'Funding' : ['#90caf9', '#42a5f5'],//_colors.scss $blue-200
     'Investment' : ['#80cbc4', '#26a69a'], //_colors.scss $teal-200
 
+  },
+  icons: {
+    'Funding' : 'cloud_upload',
+    'Investment' : 'swap_horiz',
+    'Validation' : 'check_circle',
+    'Redemption' : 'cloud_download',
   }
 };
 

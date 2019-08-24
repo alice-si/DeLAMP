@@ -1,6 +1,5 @@
 <template lang="html">
   <div>
-    {{clauseType}}
     <draggable class="dragArea list-group"
                v-bind:style="{ 'background-color': color[0] }"
                :list="selectedClauses"
@@ -16,7 +15,7 @@
                     <marquee-text :duration="6"
                                   :repeat="1"
                                   v-if="clause.title.length > 11">
-                      <h4>{{ clause.title }} </h4>
+                      <h4 style="color: #fff;">{{ clause.title }} </h4>
                     </marquee-text>
                     <h4 v-else style="color: #fff;">{{clause.title}}</h4>
 
@@ -51,10 +50,6 @@ export default {
       required: true,
       type: Array,
     },
-    clauseType: {
-      required: true,
-      type: String,
-    }
   },
   data: function() {
     return {
