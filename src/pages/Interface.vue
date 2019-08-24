@@ -5,15 +5,25 @@
                 <nav-tabs-card>
                     <template slot="content">
 
+                        <md-button class="md-round md-success" @click="test()">Deploy</md-button>
+
                         <md-tabs class="md-success" md-alignment="left">
 
                             <md-tab md-label="Funding" md-icon="cloud_upload">
                                 <md-card class="md-card-profile">
                                     <md-card-content>
-                                        <h6 class="category text-gray">Hedge against the risk</h6>
-                                        <h4 class="card-title">Select a new condition</h4>
+                                        <h6 class="category text-gray">Execute donation</h6>
+                                        <h4 class="card-title">Send funds to the contract escrow</h4>
 
-                                        <md-button class="md-round md-success" @click="test()">Split</md-button>
+                                        <md-field>
+                                            <label for="oracle">How much you want to donate?</label>
+                                            <md-input name="oracle" id="oracle" v-model="form.value" />
+                                        </md-field>
+
+                                        <md-button class="md-round md-success" @click="donate()">Donate</md-button>
+
+                                        <md-snackbar :md-active.sync="success">Your funding has been successfully recorded!</md-snackbar>
+                                        <md-snackbar :md-active.sync="failure">Your funding failed!</md-snackbar>
                                     </md-card-content>
                                 </md-card>
                             </md-tab>
@@ -24,7 +34,7 @@
                                         <h6 class="category text-gray">Hedge against the risk</h6>
                                         <h4 class="card-title">Select a new condition</h4>
 
-                                        <md-button class="md-round md-success" @click="test()">Split</md-button>
+                                        <md-button class="md-round md-success" @click="test()">Deploy</md-button>
                                     </md-card-content>
                                 </md-card>
                             </md-tab>
@@ -46,7 +56,7 @@
                                         <h6 class="category text-gray">Hedge against the risk</h6>
                                         <h4 class="card-title">Select a new condition</h4>
 
-                                        <md-button class="md-round md-success" @click="test()">Split</md-button>
+                                        <md-button class="md-round md-success" @click="test()">Deploy</md-button>
                                     </md-card-content>
                                 </md-card>
                             </md-tab>
@@ -76,13 +86,29 @@
     },
     methods: {
       test: async function() {
-        console.log("TEST");
         await contracts.deployClausesRegistry();
+        await contracts.deployFundingClause();
+        console.log("DEPLOYING legal contract");
+        await contracts.deployLegalContract();
+      },
+      donate: async function() {
+        console.log("Donating: " + this.form.value);
+        let result = await contracts.fund(this.form.value);
+        if (result) {
+          this.success = true;
+        } else {
+          this.failure = true;
+        }
+        console.log("Result: " + result);
       }
     },
     data() {
       return {
-        //projects: state.projects,
+        success: false,
+        failure: false,
+        form: {
+          value: null
+        },
       };
     }
   };

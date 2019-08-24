@@ -6,8 +6,12 @@
       <mobile-menu slot="content"></mobile-menu>
 
       <sidebar-link to="/popsicle">
-        <md-icon>bubble_chart</md-icon>
+        <md-icon>build</md-icon>
         <p>Contract Builder</p>
+      </sidebar-link>
+      <sidebar-link to="/state">
+        <md-icon>visibility</md-icon>
+        <p>Contract State</p>
       </sidebar-link>
       <sidebar-link to="/interface">
         <md-icon>unarchive</md-icon>
