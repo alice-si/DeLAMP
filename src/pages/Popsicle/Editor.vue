@@ -12,10 +12,12 @@
 
     </div>
     <div class="md-layout-item md-size-50 editor-section">
-      <h3>Contract</h3>
-      <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
-        <h4>{{ typeOfClause }}</h4>
-        <ClausesLarge :color="clauseColours[typeOfClause]"/>
+      <h3>Contract Structure</h3>
+      <div style="overflow-y: scroll; max-height: 92vh;">
+        <div v-for="(clauses, typeOfClause, idx) in clauseGroups">
+          <h4>{{ typeOfClause }}</h4>
+          <ClausesLarge :color="clauseColours[typeOfClause]" :clauseType="clauses.title"/>
+        </div>
       </div>
     </div>
   </div>
@@ -43,7 +45,6 @@ import ClausesLarge from "./ClausesLarge";
           { name: "Johnson", id: 7 },
         ],
         clauseColours: [],
-        // dragging: false
       };
     },
     computed: {
@@ -120,6 +121,5 @@ input {
   padding: 10px;
   width: 100%;
   background-color: red;
-
 }
 </style>
