@@ -36,6 +36,7 @@ export default {
     passedArguments: Object,
     // highlighted: Boolean,
     changedArguments: Array,
+    // isNew: Boolean,
   },
   computed: {
     getContentHtml() {

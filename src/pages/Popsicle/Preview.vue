@@ -89,6 +89,7 @@ function watchChanges(data) {
       let newLegalClause = createNewLegalClause(clauseDetails, selectedClause.arguments);
       if (!clausesEqual(oldLegalClause, newLegalClause)) {
         newLegalClause.changedArguments = getChangedArguments(oldLegalClause, newLegalClause);
+        // newLegalClause.isNew = newLegalClause.id != oldLegalClause.id;
         updateClause(clauseDetails.type, newLegalClause, data);
       }
     }
@@ -113,6 +114,7 @@ export default {
       rendered[type] = {
         text: '',
         type,
+        id: '',
         arguments: {},
         changedArguments: [],
         highlighted: false,

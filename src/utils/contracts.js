@@ -1,6 +1,6 @@
 import {state} from "../state.js";
 import clausesConfig from "../clausesConfig.js";
-import Vue from 'vue';
+// import Vue from 'vue';
 
 const ethers = require('ethers');
 const registryContract = require('../../build/contracts/ClauseRegistry.json');
@@ -33,17 +33,19 @@ export const contracts = {
   deployClausesRegistry: async function() {
     let registryFactory = new ethers.ContractFactory(registryContract.abi, registryContract.bytecode, signer);
     registry = await registryFactory.deploy();
-    console.log('Clauses registry deployed: ' + registry.address)
+    localStorage.registryAddress = registry.address;
+    console.log('Clauses registry deployed: ' + registry.address);
   },
   deployFundingClause: async function() {
     let fundingFactory = new ethers.ContractFactory(fundingContract.abi, fundingContract.bytecode, signer);
     fundingClause = await fundingFactory.deploy();
     await registry.registerClause(fundingClause.address, AUTHOR, 100, 25);
+    localStorage.fundingAddress = fundingClause.address;
     console.log('Funding clause deployed: ' + fundingClause.address);
   },
   init: function() {
-    registry = new ethers.Contract(REGISTRY_ADDRESS, registryContract.abi, signer);
-    fundingClause = new ethers.Contract(FUNDING_ADDRESS, fundingContract.abi, signer);
+    registry = new ethers.Contract(localStorage.registryAddress, REGISTRY_ADDRESS, registryContract.abi, signer);
+    fundingClause = new ethers.Contract(localStorage.fundingAddress, FUNDING_ADDRESS, fundingContract.abi, signer);
     impactContract = new ethers.Contract(localStorage.contractAddress || CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
 
     console.log('Clauses registry linked: ' + registry.address);
