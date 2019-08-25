@@ -44,8 +44,8 @@ export const contracts = {
     console.log('Funding clause deployed: ' + fundingClause.address);
   },
   init: function() {
-    registry = new ethers.Contract(localStorage.registryAddress, REGISTRY_ADDRESS, registryContract.abi, signer);
-    fundingClause = new ethers.Contract(localStorage.fundingAddress, FUNDING_ADDRESS, fundingContract.abi, signer);
+    registry = new ethers.Contract(localStorage.registryAddress || REGISTRY_ADDRESS, registryContract.abi, signer);
+    fundingClause = new ethers.Contract(localStorage.fundingAddress || FUNDING_ADDRESS, fundingContract.abi, signer);
     impactContract = new ethers.Contract(localStorage.contractAddress || CONTRACT_ADDRESS, impactInvestmentContract.abi, signer);
 
     console.log('Clauses registry linked: ' + registry.address);

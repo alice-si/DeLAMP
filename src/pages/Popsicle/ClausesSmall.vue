@@ -95,7 +95,7 @@ export default {
   },
   beforeMount() {
     this.fetchClauses();
-    this.fetchContract();
+    // this.fetchContract();
   }
 };
 </script>
