@@ -1,8 +1,6 @@
 <template>
     <div class="md-layout">
-        <div
-                class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-        >
+        <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25" >
             <stats-card data-background-color="green">
                 <template slot="header">
                     <md-icon>cloud_upload</md-icon>
@@ -16,79 +14,52 @@
                 <template slot="footer">
                     <div class="stats">
                         <md-icon>date_range</md-icon>
-                        Last 24 Hours
+                        Impact investment contract
                     </div>
                 </template>
             </stats-card>
         </div>
-        <!--
-        <div
-                class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-        >
+
+        <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25" >
             <stats-card data-background-color="orange">
                 <template slot="header">
-                    <md-icon>content_copy</md-icon>
+                    <md-icon>swap_horiz</md-icon>
                 </template>
 
                 <template slot="content">
-                    <p class="category">Used Space</p>
-                    <h3 class="title">
-                        49/50
-                        <small>GB</small>
-                    </h3>
+                    <p class="category">Invested</p>
+                    <h3 class="title">$0</h3>
                 </template>
 
                 <template slot="footer">
                     <div class="stats">
-                        <md-icon class="text-danger">warning</md-icon>
-                        <a href="#pablo">Get More Space...</a>
+                        <md-icon>date_range</md-icon>
+                        Impact investment contract
                     </div>
                 </template>
             </stats-card>
         </div>
-        <div
-                class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-        >
-            <stats-card data-background-color="red">
-                <template slot="header">
-                    <md-icon>info_outline</md-icon>
-                </template>
 
-                <template slot="content">
-                    <p class="category">Fixed Issues</p>
-                    <h3 class="title">75</h3>
-                </template>
-
-                <template slot="footer">
-                    <div class="stats">
-                        <md-icon>local_offer</md-icon>
-                        Tracked from Github
-                    </div>
-                </template>
-            </stats-card>
-        </div>
-        <div
-                class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-        >
+        <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25" >
             <stats-card data-background-color="blue">
                 <template slot="header">
-                    <i class="fab fa-twitter"></i>
+                    <md-icon>attach_money</md-icon>
                 </template>
 
                 <template slot="content">
-                    <p class="category">Folowers</p>
-                    <h3 class="title">+245</h3>
+                    <p class="category">Fees earned</p>
+                    <h3 class="title">${{s.fees}}</h3>
                 </template>
 
                 <template slot="footer">
                     <div class="stats">
-                        <md-icon>update</md-icon>
-                        Just Updated
+                        <md-icon>date_range</md-icon>
+                        Contract registry
                     </div>
                 </template>
             </stats-card>
         </div>
-        -->
+
     </div>
 </template>
 

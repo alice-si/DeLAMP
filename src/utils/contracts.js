@@ -14,8 +14,8 @@ const AUTHOR = '0x0432043bE8CAbbA7df8759d6E9cE8Aa5Fcc4B009';
 //TODO: Replace with own ganache address
 const ARBITER = '0xCa9267EC6C6a127606A047c2cf2D152E6fE387A1';
 
-const REGISTRY_ADDRESS= '0x8c393366bc5b89ccb66c2e35d4607c4277f9e49a';
-const FUNDING_ADDRESS = '0x272e4912e8dcb8c46fd204dab7e27ba83a27afd2';
+const REGISTRY_ADDRESS= '0x22Aa696D4Ec38435342C16590f2F6C46247E9D15';
+const FUNDING_ADDRESS = '0x140b5F95ea203E8D6AC8475E10e9cC79Efa7d55b';
 const CONTRACT_ADDRESS = '0x30f0705f6f532545d59420023a147856fdc0953c';
 
 var provider, signer, impactContract, registry, fundingClause, disputeManager;
@@ -75,6 +75,8 @@ export const contracts = {
     state.contract.successes = result.success;
     state.contract.min = await impactContract.getValue('MIN_DONATION');
     state.contract.max = await impactContract.getValue('MAX_DONATION');
+    state.contract.fees = (await provider.getBalance(registry.address))/100;
+
 
     console.log("Funded: " + state.contract.funded);
     console.log("Failures: " + state.contract.failures);
