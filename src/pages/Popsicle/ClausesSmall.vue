@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div v-if="expanded">
     <draggable class="dragArea list-group"
                :list="clauses"
                :group="{ name: 'clauses', pull: 'clone', put: false }"
@@ -65,7 +65,8 @@ export default {
     icon: {
       required: true,
       type: String,
-    }
+    },
+    expanded: Boolean,
   },
   data: function() {
     return {
@@ -133,6 +134,7 @@ input {
   margin: 5px 0 !important;
   padding: 20px;
   width: 100%;
+  cursor: pointer;
 }
 
 h6 {

@@ -43,13 +43,18 @@ export default {
 }
 
 .highlighted {
-  background-color: yellow;
+  
   /* font-size: 16px !important; */
-  transition: all 1s ease-in-out;
+  /* transition: all 1s ease-in-out;
   transition-property: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  transition-delay: 0s;
+  transition-delay: 0s; */
+  animation: blinker 2s linear normal;
+}
+
+@keyframes blinker {  
+  50% { background-color: yellow; }
 }
 
 /* #generate-button-container {

@@ -4,8 +4,8 @@ let conf = {
       {
         id: 'donation',
         title: 'Open Donation',
-        legalContent: `This deed is dated {{ max }} and entered into by
-{{ max }} incorporated and registered in [England and Wales] with company number [NUMBER] whose registered office is at {{ max }} (Issuer)
+        legalContent: `This deed is dated {{ max_donation }} and entered into by
+{{ max_donation }} incorporated and registered in [England and Wales] with company number [NUMBER] whose registered office is at {{ max_donation }} (Issuer)
 BACKGROUND
 (A) [FUNDER] (Funder) and the Issuer have entered into an agreement under which the Issuer will undertake certain activities to achieve [PURPOSE] and the Funder will deposit into escrow funds equivalent in amount to £{{ max }}. Such escrowed amounts shall be paid to the Issuer upon successful fulfilment of specific conditions as set out in this instrument.
 (B) To provide advance funding sufficient to enable the Issuer to undertake the relevant activities, the Issuer has, by resolution of its board of directors passed on {{ max }}, resolved to create up to a maximum nominal amount of £{{ max }} zero coupon unsecured loan notes [YEAR], to be constituted in the manner set out below. Agreed terms
@@ -132,7 +132,7 @@ Any Noteholder may at all reasonable times during office hours and on reasonable
   colours: {
     'Funding' : ['#90caf9', '#42a5f5'],//_colors.scss $blue-200
     'Investment' : ['#80cbc4', '#26a69a'], //_colors.scss $teal-200
-
+    'Validation': ['#ffab91', '#ff7043'],
   },
   icons: {
     'Funding' : 'cloud_upload',

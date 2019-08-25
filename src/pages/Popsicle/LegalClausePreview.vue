@@ -21,9 +21,9 @@ function replace(str, oldVal, newVal) {
   return str.split(oldVal).join(newVal);
 }
 
-function setTimerToDisableHighlighting(elemHtml) {
-  
-}
+// function setTimerToDisableHighlighting(elemHtml) {
+  // TODO
+// }
 
 export default {
   name: "LegalClausePreview",
@@ -45,18 +45,21 @@ export default {
         let className = this.changedArguments.includes(passedArgumentName) ? 'highlighted' : '';
         let passedArgumentVal = `<span class="${className}">${this.passedArguments[passedArgumentName]}</span>`;
         if (updated) {
-          setTimerToDisableHighlighting(passedArgumentVal);
+          // setTimerToDisableHighlighting(passedArgumentVal);
         }
         result = replace(result, '{{ ' + passedArgumentName + ' }}', passedArgumentVal);
+        result = replace(result, '{{' + passedArgumentName + '}}', passedArgumentVal);
+        result = replace(result, '{{ ' + passedArgumentName + '}}', passedArgumentVal);
+        result = replace(result, '{{' + passedArgumentName + ' }}', passedArgumentVal);
       }
       
-      setTimeout(function() {
-        var elems = document.querySelectorAll(".highlighted");
+      // setTimeout(function() {
+      //   var elems = document.querySelectorAll(".highlighted");
 
-        [].forEach.call(elems, function(el) {
-            el.classList.remove("highlighted");
-        });
-      }, HIGHLIGHTING_MS);
+      //   [].forEach.call(elems, function(el) {
+      //       el.classList.remove("highlighted");
+      //   });
+      // }, HIGHLIGHTING_MS);
 
 
       return result;

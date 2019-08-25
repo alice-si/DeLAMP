@@ -73,6 +73,7 @@ export default {
     processClauseChange () {
       this.globalSelectedClauses = this.selectedClauses;
       Vue.set(state, 'selected', this.selectedClauses);
+      console.log(state);
     }
   },
   name: "ClausesLarge",

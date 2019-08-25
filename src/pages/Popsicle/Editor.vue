@@ -44,6 +44,12 @@ import ClausesLarge from "./ClausesLarge";
       ClausesLarge,
     },
     data() {
+      let expanded = {};
+      let counter = 0;
+      for (let type of Clauses.types) {
+        expanded[type] = (counter == 0);
+        counter++;
+      }
       return {
         clauseGroups: [],
         chosenClauses: [
@@ -53,10 +59,7 @@ import ClausesLarge from "./ClausesLarge";
         ],
         clauseColours: [],
         clauseIcons: null,
-        expanded: {
-          "Funding": true,
-          "Investment": false
-        }
+        expanded
       };
     },
     computed: {
