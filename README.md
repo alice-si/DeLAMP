@@ -1,6 +1,10 @@
-DeLAMP is a decentralised legal agreement marketplace protocol. It was conceived at EthBerlinZwei by the Alice team and Tara Waters, a partner at Ashurst, the global lawfirm that supports Alice on a pro-bono basis. Thank you Tara.
+DeLAMP stands for Decentralised Legal Agreement Marketplace Protocol. DeLAMP makes it easy to deploy compliant dApps. It ties open source legal clauses to smart contract code, tracks their use to signal which are the most popular, automatically pays code and clause authors, and provides governance tools for parties to amend agreements. It's also extremely easy to use with a simple drag and drop constructor.
+
+A prototype was built at EthBerlinZwei by the Alice team and Tara Waters, a partner at Ashurst, the global lawfirm that supports Alice on a pro-bono basis. Thank you Tara.
 
 Hackathon presentation: http://bit.ly/322v0E8
+
+Demo: https://delamp.alice.si (connect your web3 browser to Skale chain http://157.230.171.237:8068/)
 
 
 ## Inspiration for DeLAMP
