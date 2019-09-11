@@ -4,7 +4,7 @@ A prototype was built at EthBerlinZwei by the Alice team and Tara Waters, a part
 
 Hackathon presentation: http://bit.ly/322v0E8
 
-Demo: https://delamp.alice.si (connect your web3 browser to Skale chain http://157.230.171.237:8068/)
+Demo: https://delamp.alice.si (on Rinkeby)
 
 
 ## Inspiration for DeLAMP
