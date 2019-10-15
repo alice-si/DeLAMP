@@ -36,6 +36,9 @@ Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(VueSignature);
 
+// Explanation https://github.com/ethers-io/ethers.js/issues/433#issuecomment-466678678
+window.ethereum.enable();
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
